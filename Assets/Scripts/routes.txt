@@ -1,0 +1,23 @@
+Bundaran HI,Dukuh Atas BNI,3000
+Bundaran HI,Setiabudi Astra,4000
+Bundaran HI,Bendungan Hilir,4000
+Bundaran HI,Istora Mandiri,5000
+Bundaran HI,Senayan,6000
+Bundaran HI,ASEAN,7000
+Bundaran HI,Blok M BCA,8000
+Bundaran HI,Blok A,9000
+Bundaran HI,Haji Nawi,10000
+Bundaran HI,Cipete Raya,11000
+Bundaran HI,Fatmwati Indomaret,13000
+Bundaran HI,Lebak Bulus Grab,14000
+Bundaran HI,Dukuh Atas BNI,3000
+Bundaran HI,Setiabudi Astra,4000
+Bundaran HI,Bendungan Hilir,4000
+Bundaran HI,Istora Mandiri,5000
+Bundaran HI,Senayan,6000
+Bundaran HI,ASEAN,7000
+Bundaran HI,Blok M BCA,8000
+Bundaran HI,Blok A,9000
+Bundaran HI,Cipete Raya,11000
+Bundaran HI,Fatmwati Indomaret,13000
+Bundaran HI,Lebak Bulus Grab,14000
