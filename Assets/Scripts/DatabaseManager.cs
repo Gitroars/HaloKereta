@@ -91,7 +91,7 @@ public class DatabaseManager : MonoBehaviour
 
     
     
-    public void AddUser()
+    public void AddUser(string phoneNumber, string fullName, string email,string pin)
     {
         
         try
@@ -101,7 +101,7 @@ public class DatabaseManager : MonoBehaviour
                 connection.Open();
                 using var cmd = new MySqlCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = "UPDATE users SET price=3000 WHERE id=1";
+                cmd.CommandText = $"INSERT IGNORE INTO users (name,email,phone_number,pin) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}')";
                 cmd.ExecuteNonQuery();
                 print("MySQL - Opened Connection");
             }

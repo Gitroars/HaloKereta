@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.SceneManagement;
+
 public class Registration : MonoBehaviour
 {
-    private DatabaseManager dm;
-    [Header("InputField Properties")]
-    public InputField phoneNumberField,nameField,emailField,pinField;
+    public DatabaseManager dm;
+    public GameObject profileCanvas, pinCanvas;
+    public TMP_InputField phoneNumberField,nameField,emailField,createPinField,confirmPinField;
+
+    private string phone_number,name,email;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,12 +24,23 @@ public class Registration : MonoBehaviour
         
     }
 
-    void SubmitRegistration()
+    public void ContinueRegistration()
     {
-        string phone_number = phoneNumberField.text;
-        string name = nameField.text;
-        string email = emailField.text;
-        string pin = pinField.text;
-        dm.AddUser();
+        phone_number = phoneNumberField.text;
+        name = nameField.text;
+        email = emailField.text;
+        profileCanvas.SetActive(false);
+        pinCanvas.SetActive(true);
+    }
+
+    public void CompleteRegistration()
+    {
+        string createPin = createPinField.text;
+        string confirmPin = confirmPinField.text;
+        if (createPin == confirmPin)
+        {
+            dm.AddUser(phone_number,name,email,createPin);
+            SceneManager.LoadScene("HomePage");
+        }
     }
 }
