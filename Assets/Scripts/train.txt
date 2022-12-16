@@ -1,0 +1,2 @@
+Train Rail 1, Shunting locomotive, 6
+Train Rail 2, Electric train remover, 6

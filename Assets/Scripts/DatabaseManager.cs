@@ -10,6 +10,8 @@ public class DatabaseManager : MonoBehaviour
     #region VARIABLES
 
     private string path = "Assets/Scripts/routes.txt";
+    private string train = "Assets/Scripts/train.txt";
+    private string machinist = "Assets/Scripts/machinist.txt";
 
     [Header("Database Properties")] public string User = "doadmin";
     public string Password = "AVNS_KoU3bp-RJSxuf5mk-xU";
@@ -29,6 +31,8 @@ public class DatabaseManager : MonoBehaviour
     {
         SetupConnection();
         AddRoutes();
+        AddTrain();
+        AddMachinist();
 
     }
 
@@ -87,6 +91,91 @@ public class DatabaseManager : MonoBehaviour
         print("Successfully added new routes");
 
 
+    }
+
+    private void AddMachinist()
+    {
+        
+        using var cmd = new MySqlCommand();
+        cmd.Connection = connection;
+        
+        
+        // Read text file
+        foreach (string line in System.IO.File.ReadLines(machinist))
+        {
+            List<string> data = new List<string>(line.Split(','));
+            string name = data[0];
+            
+            
+            try
+            {
+                using (connection)
+                {
+                    connection.Open();
+                    print("MySQL - Opened Connection");
+                    cmd.CommandText =
+                        $"INSERT IGNORE INTO machinist (machinist_name) VALUES('{name}')";
+                        
+                             
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (MySqlException exception)
+            {
+                print(exception.Message);
+            }
+            
+    
+            
+        }
+    
+        print("Successfully added new machinist");
+    
+    
+    }
+
+    
+    private void AddTrain()
+    {
+        
+        using var cmd = new MySqlCommand();
+        cmd.Connection = connection;
+        
+        
+        // Read text file
+        foreach (string line in System.IO.File.ReadLines(train))
+        {
+            List<string> data = new List<string>(line.Split(','));
+            string rail = data[0];
+            string type = data[1];
+            string carriage = data[2];
+
+
+            try
+            {
+                using (connection)
+                {
+                    connection.Open();
+                    print("MySQL - Opened Connection");
+                    cmd.CommandText =
+                        $"INSERT IGNORE INTO train (railway,train_type,carriage) VALUES('{rail}','{type}',{carriage})";
+                        
+                             
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (MySqlException exception)
+            {
+                print(exception.Message);
+            }
+            
+    
+            
+        }
+    
+        print("Successfully added new train");
+    
+    
     }
 
     
