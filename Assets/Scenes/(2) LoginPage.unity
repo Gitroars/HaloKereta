@@ -603,11 +603,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e6546c4e8dda84fbb131d8d773e408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  User: doadmin
-  Password: AVNS_KoU3bp-RJSxuf5mk-xU
-  Host: db-mysql-sgp1-09156-do-user-13057152-0.b.db.ondigitalocean.com
-  Port: 25060
-  Database: mrtdb
+  Host: 34.101.117.2
+  User: dbadmin
+  Password: PAFr7Z5$hRnX
+  Database: mysql
 --- !u!114 &730844345
 MonoBehaviour:
   m_ObjectHideFlags: 0

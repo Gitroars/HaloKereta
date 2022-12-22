@@ -33,14 +33,14 @@ public class Registration : MonoBehaviour
         pinCanvas.SetActive(true);
     }
 
-    public void CompleteRegistration()
-    {
-        string createPin = createPinField.text;
-        string confirmPin = confirmPinField.text;
-        if (createPin == confirmPin)
-        {
-            dm.AddUser(phone_number,name,email,createPin);
-            SceneManager.LoadScene("HomePage");
-        }
-    }
+    // public void CompleteRegistration()
+    // {
+    //     string createPin = createPinField.text;
+    //     string confirmPin = confirmPinField.text;
+    //     if (createPin == confirmPin)
+    //     {
+    //         dm.AddUser(phone_number,name,email,createPin);
+    //         SceneManager.LoadScene("HomePage");
+    //     }
+    // }
 }
