@@ -35,9 +35,9 @@ public class DatabaseManager : MonoBehaviour
     private void Start()
     {
         SetupConnection();
-        
-        // AddTrain();
-        // AddMachinist();
+        AddRoutes();
+        AddTrain();
+        AddMachinist();
 
     }
 
