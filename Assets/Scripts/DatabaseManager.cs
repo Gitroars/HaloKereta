@@ -216,7 +216,7 @@ public class DatabaseManager : MonoBehaviour
         
     }
 
-    public void CheckUserNumber(string mobileNumber)
+    public Boolean CheckUserNumber(string mobileNumber)
     {
         try
         {
@@ -235,7 +235,9 @@ public class DatabaseManager : MonoBehaviour
                         {
                             case 1:
                                 print("Mobile Number Found!");
+                                return true; 
                                 break;
+                            
                             default:
                                 print("Error: Mobile Number Not Found!");
                                 break;
@@ -249,6 +251,43 @@ public class DatabaseManager : MonoBehaviour
         {
             print(exception.Message);
         }
+
+        return false;
+    }
+    
+    public Boolean CheckUserPin(string mobileNumber,string pinNumber)
+    {
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT pin from Users WHERE mobile_number='{mobileNumber}' )";
+                var myReader = cmd.ExecuteReader();
+                
+                while (myReader.Read())
+                {
+                    string savedPin = (myReader.GetString(0));
+                    if (pinNumber == savedPin)
+                    {
+                        print("Login Success!");
+                    }
+                    else
+                    {
+                        print("Login Failed!");
+                    }
+                }
+                print("MySQL - Opened Connection To Check Mobile Number");
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        return false;
     }
     
     

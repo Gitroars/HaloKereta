@@ -7,8 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {
-    public TMP_InputField phoneNumberField;
+    public GameObject numberCanvas, pinCanvas;
+    public TMP_InputField phoneNumberField,pinNumberField;
     public DatabaseManager dm;
+
+    private string mobileNumber, pinNumber;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +26,19 @@ public class Login : MonoBehaviour
 
     public void PhoneLogin()
     {
-        string phoneNumber = phoneNumberField.text;
-        dm.CheckUserNumber(phoneNumber);
+        string mobileNumber = phoneNumberField.text;
+        bool mobileNumberExist = dm.CheckUserNumber(mobileNumber);
+        if (mobileNumberExist)
+        {
+            numberCanvas.SetActive(false);
+            pinCanvas.SetActive(true);
+        }
     }
 
     public void AttemptLogin()
     {
-        
+        pinNumber = pinNumberField.text;
+        bool pinIsCorrect = dm.CheckUserPin(mobileNumber,pinNumber);
     }
     
     public void ToRegisterPage()
