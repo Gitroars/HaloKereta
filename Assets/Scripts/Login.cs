@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {
+    public TMP_InputField phoneNumberField;
+    public DatabaseManager dm;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +21,12 @@ public class Login : MonoBehaviour
         
     }
 
+    public void PhoneLogin()
+    {
+        string phoneNumber = phoneNumberField.text;
+        dm.CheckUserNumber(phoneNumber);
+    }
+
     public void AttemptLogin()
     {
         
@@ -24,6 +34,6 @@ public class Login : MonoBehaviour
     
     public void ToRegisterPage()
     {
-        SceneManager.LoadScene("RegistrationPage");
+        SceneManager.LoadScene("(3) RegistrationPage 1");
     }
 }

@@ -204,7 +204,7 @@ public class DatabaseManager : MonoBehaviour
                 connection.Open();
                 using var cmd = new MySqlCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $"INSERT IGNORE INTO users (name,email,phone_number,pin) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}')";
+                cmd.CommandText = $"INSERT IGNORE INTO Users (full_name,email,mobile_number,pin) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}')";
                 cmd.ExecuteNonQuery();
                 print("MySQL - Opened Connection");
             }
@@ -214,6 +214,41 @@ public class DatabaseManager : MonoBehaviour
             print(exception.Message);
         }
         
+    }
+
+    public void CheckUserNumber(string mobileNumber)
+    {
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT EXISTS(SELECT * from Users WHERE mobile_number='{mobileNumber}')";
+                var myReader = cmd.ExecuteReader();
+                
+                    while (myReader.Read())
+                    {
+                        int numberExist = Convert.ToInt32(myReader.GetString(0));
+                        switch (numberExist)
+                        {
+                            case 1:
+                                print("Mobile Number Found!");
+                                break;
+                            default:
+                                print("Error: Mobile Number Not Found!");
+                                break;
+                                
+                        }
+                    }
+                    print("MySQL - Opened Connection To Check Mobile Number");
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
     }
     
     

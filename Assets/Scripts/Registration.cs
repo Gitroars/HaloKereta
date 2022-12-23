@@ -40,7 +40,7 @@ public class Registration : MonoBehaviour
         if (createPin == confirmPin)
         {
             dm.AddUser(phone_number,name,email,createPin);
-            SceneManager.LoadScene("HomePage");
+            SceneManager.LoadScene("(1) HomePage");
         }
     }
 }

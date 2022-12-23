@@ -603,10 +603,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e6546c4e8dda84fbb131d8d773e408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Host: 34.101.117.2
-  User: dbadmin
-  Password: PAFr7Z5$hRnX
-  Database: mysql
 --- !u!114 &730844345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,6 +615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edeff34ed39e8f34abb8828582347f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phoneNumberField: {fileID: 1543545888}
+  dm: {fileID: 730844344}
 --- !u!1 &858995398
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +776,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1208484555}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730844345}
+        m_TargetAssemblyTypeName: Login, Assembly-CSharp
+        m_MethodName: PhoneLogin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1208484555
 MonoBehaviour:
   m_ObjectHideFlags: 0
