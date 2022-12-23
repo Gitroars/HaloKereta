@@ -251,6 +251,47 @@ public class DatabaseManager : MonoBehaviour
         }
     }
     
+    public void AddTickets(string TransactionDate,string IdTicket, int TicketPrice, int TicketStatus, int IdUser, int IdTrain, int IdPayment)
+    {
+        
+        using var cmd = new MySqlCommand();
+        cmd.Connection = connection;
+        
+        
+        // Read text file
+        foreach (string line in System.IO.File.ReadLines(machinist))
+        {
+            List<string> data = new List<string>(line.Split(','));
+            string name = data[0];
+            
+            
+            try
+            {
+                using (connection)
+                {
+                    connection.Open();
+                    print("MySQL - Opened Connection");
+                    cmd.CommandText =
+                        $"INSERT IGNORE INTO Tickets (Transaction_Date,ticket_id,price,status,user_id,train_id,payment_id) VALUES('{TransactionDate}','{IdTicket}','{IdUser}','{IdTrain}','{IdPayment}')";
+                        
+                             
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (MySqlException exception)
+            {
+                print(exception.Message);
+            }
+            
+    
+            
+        }
+    
+        print("Successfully added new Ticket");
+    
+    
+    }
+    
     
 
     
