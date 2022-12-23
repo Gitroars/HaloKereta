@@ -16,6 +16,7 @@
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     <data-source source="LOCAL" name="mrtdb@vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.co" uuid="f90fdf14-4d9b-47f9-81f3-ce00da6b831b">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
@@ -23,10 +24,16 @@
       <jdbc-url>jdbc:mysql://vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.co:16751/mrtdb</jdbc-url>
 =======
     <data-source source="LOCAL" name="mrtdb@vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com" uuid="8f4b7f5f-455e-4d9b-9a3e-dc6d62524cff">
+=======
+    <data-source source="LOCAL" name="mrtdb@vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com" uuid="91a1072c-0564-46bf-aa17-087165a16568">
+>>>>>>> Stashed changes
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com:16751/mrtdb</jdbc-url>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
