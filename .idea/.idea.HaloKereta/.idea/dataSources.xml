@@ -1,40 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@db-mysql-sgp1-09156-do-user-13057152-0.b.db.ondigitalocean.com" uuid="13e2baf4-dfe8-4bb3-b00f-a5d4b5ac3488">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://db-mysql-sgp1-09156-do-user-13057152-0.b.db.ondigitalocean.com:25060</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="34.101.117.2" uuid="ba7968ca-00e1-4f7d-9af4-abb99e896eae">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://34.101.117.2:3306</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    <data-source source="LOCAL" name="mrtdb@vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.co" uuid="f90fdf14-4d9b-47f9-81f3-ce00da6b831b">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.co:16751/mrtdb</jdbc-url>
-=======
-    <data-source source="LOCAL" name="mrtdb@vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com" uuid="8f4b7f5f-455e-4d9b-9a3e-dc6d62524cff">
-=======
-    <data-source source="LOCAL" name="mrtdb@vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com" uuid="91a1072c-0564-46bf-aa17-087165a16568">
->>>>>>> Stashed changes
+    <data-source source="LOCAL" name="mrtdb@vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com" uuid="270ae76f-87da-45e2-a9d0-5f65031fea86">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com:16751/mrtdb</jdbc-url>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
