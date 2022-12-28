@@ -35,7 +35,7 @@ public class DatabaseManager : MonoBehaviour
     private void Start()
     {
         SetupConnection();
-        // AddRoutes();
+        AddRoutes();
         // AddTrain();
         // AddMachinist();
 
@@ -88,7 +88,7 @@ public class DatabaseManager : MonoBehaviour
                 {
                     connection.Open();
                     print("MySQL - Opened Connection");
-                    cmd.CommandText = $"SHOW DATABASES";
+                    cmd.CommandText = $"INSERT IGNORE INTO Routes (station_origin,station_destination,route_price) VALUES('{origin}','{destination}',{cost})";
                         // $"INSERT IGNORE INTO routes (station_origin,station_destination,price) VALUES('{origin}','{destination}',{cost})";
                         
                              
@@ -368,7 +368,38 @@ public class DatabaseManager : MonoBehaviour
 
         return false;
     }
-    
+
+    public int GetRoutePrice(string origin, string destination)
+    {
+        
+        try
+        {
+            using (connection)
+            {
+                
+                connection.Open();
+                print("MySQL - Opened Connection To GET ROUTE PRICE");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT route_price from Routes WHERE station_origin='{origin}' AND station_destination = '{destination}'";
+                var myReader = cmd.ExecuteReader();
+                
+                while (myReader.Read())
+                {
+                    int routePrice = Convert.ToInt32((myReader.GetString(0)));
+                    return routePrice;
+                }
+                
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+
+        return 0;
+    }
     public void AddTickets(string TransactionDate,string IdTicket, int TicketPrice, int TicketStatus, int IdUser, int IdTrain, int IdPayment)
     {
         

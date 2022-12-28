@@ -30,9 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/(8) OngoingPage.unity
     guid: c145cf01d8b324345b340c3dec566fe5
   - enabled: 1
-    path: Assets/Scenes/(10) HistoryViewPage.unity
-    guid: 780f17e04aa194941b0d0da38e0fb6ea
-  - enabled: 1
     path: Assets/Scenes/(9) HistoryPage.unity
     guid: 57886a5f54d60904fab34103569395a0
   m_configObjects: {}
