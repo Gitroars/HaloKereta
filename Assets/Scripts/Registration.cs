@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mail;
@@ -10,10 +11,12 @@ public class Registration : MonoBehaviour
 {
     public DatabaseManager dm;
     public GameObject profileCanvas, pinCanvas;
-    public TMP_InputField phoneNumberField,nameField,emailField,createPinField,confirmPinField;
-    private Dropdown genderDropdown;
+    public TMP_InputField phoneNumberField,nameField,ageField,emailField,createPinField,confirmPinField;
+    public TMP_Dropdown genderDropdown;
 
-    private string phoneNumber,name,email,gender, birthDate;
+    private string phoneNumber,name,email,gender;
+    private char newGender;
+    private int age;
     
     // Start is called before the first frame update
     void Start()
@@ -32,17 +35,20 @@ public class Registration : MonoBehaviour
     {
         phoneNumber = "62"+phoneNumberField.text;
         name = nameField.text;
+        age = Convert.ToInt32(ageField.text);
         email = emailField.text;
         gender = genderDropdown.options[genderDropdown.value].text;
+        newGender = ConvertGender(gender);
         
 
         bool nameValid = IsNameValid(name);
+        bool ageValid = IsAgeValid(age);
         bool phoneNumberValid = IsNumberValid(phoneNumber);
         bool emailValid = IsEmailValid(email);
         bool numberExist = dm.CheckUserNumber(phoneNumber);
         bool emailExist = dm.CheckUserEmail(email);
         
-        if(nameValid && phoneNumberValid && emailValid && !numberExist && !emailExist)
+        if(nameValid && ageValid && phoneNumberValid && emailValid && !numberExist && !emailExist)
         {
             profileCanvas.SetActive(false);
             pinCanvas.SetActive(true);
@@ -64,6 +70,31 @@ public class Registration : MonoBehaviour
         }
 
         return nameValid;
+    }
+
+    private char ConvertGender(string gender)
+    {
+        if (gender == "Male")
+        {
+            return 'm';
+        }
+        else if (gender == "Female")
+        {
+            return 'f';
+        }
+
+        return 'n';
+    }
+
+    private bool IsAgeValid(int age)
+    {
+        bool ageValid = false;
+        if (age >= 0 && age <= 150)
+        {
+            ageValid = true;
+        }
+
+        return ageValid;
     }
     private bool IsNumberValid(string phoneNumber)
     {
@@ -98,8 +129,8 @@ public class Registration : MonoBehaviour
         string confirmPin = confirmPinField.text;
         if (createPin == confirmPin)
         {
-            dm.AddUser(phoneNumber,name,email,createPin);
-            SceneManager.LoadScene("(1) HomePage");
+            dm.AddUser(phoneNumber,name,email,createPin,newGender,age);
+            SceneManager.LoadScene("(1) StartPage");
         }
     }
 }

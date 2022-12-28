@@ -40,10 +40,14 @@ public class Login : MonoBehaviour
     {
         pinNumber = pinNumberField.text;
         bool pinIsCorrect = dm.CheckUserPin(mobileNumber,pinNumber);
+        if (pinIsCorrect)
+        {
+            
+        }
     }
     
     public void ToRegisterPage()
     {
-        SceneManager.LoadScene("(3) RegistrationPage 1");
+        SceneManager.LoadScene("(3) RegistrationPage");
     }
 }

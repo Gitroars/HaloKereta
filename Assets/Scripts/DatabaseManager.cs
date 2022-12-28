@@ -194,7 +194,7 @@ public class DatabaseManager : MonoBehaviour
     
     }
     #endregion
-    public void AddUser(string phoneNumber, string fullName, string email,string pin)
+    public void AddUser(string phoneNumber, string fullName, string email,string pin,char gender,int age)
     {
         
         try
@@ -204,7 +204,7 @@ public class DatabaseManager : MonoBehaviour
                 connection.Open();
                 using var cmd = new MySqlCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $"INSERT IGNORE INTO Users (full_name,email,mobile_number,pin) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}')";
+                cmd.CommandText = $"INSERT IGNORE INTO Users (full_name,email,mobile_number,sex,age) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}','{gender}',{age})";
                 cmd.ExecuteNonQuery();
                 print("MySQL - Opened Connection");
             }
