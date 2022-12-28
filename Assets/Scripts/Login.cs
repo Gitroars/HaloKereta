@@ -26,11 +26,13 @@ public class Login : MonoBehaviour
 
     public void PhoneLogin()
     {
-        string mobileNumber = "62"+phoneNumberField.text;
+        mobileNumber = "62"+phoneNumberField.text;
+        print("Current Number: "+mobileNumber);
         bool mobileNumberExist = dm.CheckUserNumber(mobileNumber);
         
         if (mobileNumberExist)
         {
+            print("Mobile Number Found");
             numberCanvas.SetActive(false);
             pinCanvas.SetActive(true);
         }
@@ -42,7 +44,13 @@ public class Login : MonoBehaviour
         bool pinIsCorrect = dm.CheckUserPin(mobileNumber,pinNumber);
         if (pinIsCorrect)
         {
-            
+            int currentUserID = dm.GetUserID(mobileNumber);
+            PlayerPrefs.SetInt("userID",currentUserID);
+            SceneManager.LoadScene("(1) StartPage");
+        }
+        else if(!pinIsCorrect)
+        {
+            print("Incorrect PIN");
         }
     }
     

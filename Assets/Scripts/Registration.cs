@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mail;
+using System.Globalization;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,6 +18,8 @@ public class Registration : MonoBehaviour
     private string phoneNumber,name,email,gender;
     private char newGender;
     private int age;
+    
+   
     
     // Start is called before the first frame update
     void Start()
@@ -44,12 +47,20 @@ public class Registration : MonoBehaviour
         bool nameValid = IsNameValid(name);
         bool ageValid = IsAgeValid(age);
         bool phoneNumberValid = IsNumberValid(phoneNumber);
-        bool emailValid = IsEmailValid(email);
+        
         bool numberExist = dm.CheckUserNumber(phoneNumber);
         bool emailExist = dm.CheckUserEmail(email);
         
-        if(nameValid && ageValid && phoneNumberValid && emailValid && !numberExist && !emailExist)
+        print("Name valid:"+ nameValid);
+        print("Age valid:"+ ageValid);
+        print("Number valid:"+ phoneNumberValid);
+        
+        print("Number:" +  phoneNumber + numberExist);
+        print("Email:" + email+ emailExist);
+        
+        if(nameValid && ageValid && phoneNumberValid  && !numberExist && !emailExist)
         {
+            print("Proceeding to next phase of Registration...");
             profileCanvas.SetActive(false);
             pinCanvas.SetActive(true);
         }
@@ -88,13 +99,13 @@ public class Registration : MonoBehaviour
 
     private bool IsAgeValid(int age)
     {
-        bool ageValid = false;
+       
         if (age >= 0 && age <= 150)
         {
-            ageValid = true;
+            return true;
         }
 
-        return ageValid;
+        return false;
     }
     private bool IsNumberValid(string phoneNumber)
     {
@@ -109,27 +120,19 @@ public class Registration : MonoBehaviour
         }
         return numberValid;
     }
-    private bool IsEmailValid(string email)
-    {
-        var valid = true;
-        try
-        {
-            var emailAddress = new MailAddress(email);
-        }
-        catch
-        {
-            valid = false;
-        }
-        return valid;
-    }
+    
+    
+            
+    
+
 
     public void CompleteRegistration()
     {
         string createPin = createPinField.text;
         string confirmPin = confirmPinField.text;
-        if (createPin == confirmPin)
+        if (createPin.Length ==6 && createPin == confirmPin)
         {
-            dm.AddUser(phoneNumber,name,email,createPin,newGender,age);
+            dm.AddUser(name,email,phoneNumber,createPin,newGender,age);
             SceneManager.LoadScene("(1) StartPage");
         }
     }

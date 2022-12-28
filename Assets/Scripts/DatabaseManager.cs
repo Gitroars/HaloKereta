@@ -35,9 +35,9 @@ public class DatabaseManager : MonoBehaviour
     private void Start()
     {
         SetupConnection();
-        AddRoutes();
-        AddTrain();
-        AddMachinist();
+        // AddRoutes();
+        // AddTrain();
+        // AddMachinist();
 
     }
 
@@ -194,7 +194,7 @@ public class DatabaseManager : MonoBehaviour
     
     }
     #endregion
-    public void AddUser(string phoneNumber, string fullName, string email,string pin,char gender,int age)
+    public void AddUser( string fullName, string email,string phoneNumber,string pin,char gender,int age)
     {
         
         try
@@ -204,7 +204,7 @@ public class DatabaseManager : MonoBehaviour
                 connection.Open();
                 using var cmd = new MySqlCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $"INSERT IGNORE INTO Users (full_name,email,mobile_number,sex,age) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}','{gender}',{age})";
+                cmd.CommandText = $"INSERT IGNORE INTO Users (full_name,email,mobile_number,pin,sex,age) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}','{gender}',{age})";
                 cmd.ExecuteNonQuery();
                 print("MySQL - Opened Connection");
             }
@@ -213,7 +213,37 @@ public class DatabaseManager : MonoBehaviour
         {
             print(exception.Message);
         }
+        connection.Close();
         
+    }
+    
+    public int GetUserID(string mobileNumber)
+    {
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $"SELECT id from Users WHERE mobile_number='{mobileNumber}')";
+                var myReader = cmd.ExecuteReader();
+                
+                while (myReader.Read())
+                {
+                    int userID = Convert.ToInt32(myReader.GetString(0));
+                    print("User ID: "+userID);
+                }
+                print("MySQL - Opened Connection To GET USER ID");
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+
+        return 0;
     }
 
     public Boolean CheckUserEmail(string email)
@@ -240,6 +270,7 @@ public class DatabaseManager : MonoBehaviour
                             
                             default:
                                 print("Email Not Found!");
+                                return false;
                                 break;
                                 
                         }
@@ -251,6 +282,7 @@ public class DatabaseManager : MonoBehaviour
         {
             print(exception.Message);
         }
+        connection.Close();
 
         return false;
     }
@@ -264,7 +296,7 @@ public class DatabaseManager : MonoBehaviour
                 connection.Open();
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $" SELECT EXISTS(SELECT * from Users WHERE phone_number='{phoneNumber}')";
+                cmd.CommandText = $" SELECT EXISTS(SELECT * from Users WHERE mobile_number='{phoneNumber}')";
                 var myReader = cmd.ExecuteReader();
                 
                 while (myReader.Read())
@@ -279,6 +311,7 @@ public class DatabaseManager : MonoBehaviour
                             
                         default:
                             print("Error: Mobile Number Not Found!");
+                            return false;
                             break;
                                 
                     }
@@ -290,41 +323,48 @@ public class DatabaseManager : MonoBehaviour
         {
             print(exception.Message);
         }
+        connection.Close();
 
         return false;
     }
     
     public Boolean CheckUserPin(string mobileNumber,string pinNumber)
     {
+        print("Login Number" + mobileNumber);
+        print("Login PIN "+ pinNumber);
         try
         {
             using (connection)
             {
+                
                 connection.Open();
+                print("MySQL - Opened Connection To Check Mobile Number");
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $" SELECT pin from Users WHERE mobile_number='{mobileNumber}' )";
+                cmd.CommandText = $" SELECT pin from Users WHERE mobile_number='{mobileNumber}'";
                 var myReader = cmd.ExecuteReader();
                 
                 while (myReader.Read())
                 {
                     string savedPin = (myReader.GetString(0));
+                    
+                    print("Stored PIN is " + savedPin);
                     if (pinNumber == savedPin)
                     {
                         print("Login Success!");
+                        connection.Close();
+                        return true;
                     }
-                    else
-                    {
-                        print("Login Failed!");
-                    }
+                    
                 }
-                print("MySQL - Opened Connection To Check Mobile Number");
+                
             }
         }
         catch (MySqlException exception)
         {
             print(exception.Message);
         }
+        connection.Close();
 
         return false;
     }
@@ -364,6 +404,7 @@ public class DatabaseManager : MonoBehaviour
     
             
         }
+        connection.Close();
     
         print("Successfully added new Ticket");
     
