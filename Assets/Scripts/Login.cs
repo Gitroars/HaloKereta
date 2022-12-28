@@ -26,8 +26,9 @@ public class Login : MonoBehaviour
 
     public void PhoneLogin()
     {
-        string mobileNumber = phoneNumberField.text;
+        string mobileNumber = "62"+phoneNumberField.text;
         bool mobileNumberExist = dm.CheckUserNumber(mobileNumber);
+        
         if (mobileNumberExist)
         {
             numberCanvas.SetActive(false);

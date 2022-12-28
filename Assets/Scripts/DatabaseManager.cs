@@ -216,7 +216,7 @@ public class DatabaseManager : MonoBehaviour
         
     }
 
-    public Boolean CheckUserNumber(string mobileNumber)
+    public Boolean CheckUserEmail(string email)
     {
         try
         {
@@ -225,7 +225,7 @@ public class DatabaseManager : MonoBehaviour
                 connection.Open();
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $" SELECT EXISTS(SELECT * from Users WHERE mobile_number='{mobileNumber}')";
+                cmd.CommandText = $" SELECT EXISTS(SELECT * from Users WHERE email='{email}')";
                 var myReader = cmd.ExecuteReader();
                 
                     while (myReader.Read())
@@ -234,17 +234,56 @@ public class DatabaseManager : MonoBehaviour
                         switch (numberExist)
                         {
                             case 1:
-                                print("Mobile Number Found!");
+                                print("Email Found!");
                                 return true; 
                                 break;
                             
                             default:
-                                print("Error: Mobile Number Not Found!");
+                                print("Email Not Found!");
                                 break;
                                 
                         }
                     }
-                    print("MySQL - Opened Connection To Check Mobile Number");
+                    print("MySQL - Opened Connection To Check Email");
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        return false;
+    }
+    
+    public Boolean CheckUserNumber(string phoneNumber)
+    {
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT EXISTS(SELECT * from Users WHERE phone_number='{phoneNumber}')";
+                var myReader = cmd.ExecuteReader();
+                
+                while (myReader.Read())
+                {
+                    int numberExist = Convert.ToInt32(myReader.GetString(0));
+                    switch (numberExist)
+                    {
+                        case 1:
+                            print("Mobile Number Found!");
+                            return true; 
+                            break;
+                            
+                        default:
+                            print("Error: Mobile Number Not Found!");
+                            break;
+                                
+                    }
+                }
+                print("MySQL - Opened Connection To Check Mobile Number");
             }
         }
         catch (MySqlException exception)
