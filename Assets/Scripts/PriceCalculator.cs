@@ -11,6 +11,10 @@ public class PriceCalculator : MonoBehaviour
     public TMP_Dropdown originDropdown,destinationDropdown;
 
     public TMP_Text priceText;
+
+    private string stationOrigin, stationDestination;
+
+    private int ticketPrice;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,10 +43,20 @@ public class PriceCalculator : MonoBehaviour
 
     void CalculatePrice()
     {
-        string origin = originDropdown.options[originDropdown.value].text;
-        string destination = destinationDropdown.options[destinationDropdown.value].text;
-        int newPrice = dm.GetRoutePrice(origin, destination);
-        priceText.text = "BUY TICKETS - RP. "+ newPrice.ToString();
+        stationOrigin = originDropdown.options[originDropdown.value].text;
+        stationDestination = destinationDropdown.options[destinationDropdown.value].text;
+        ticketPrice = dm.GetRoutePrice(stationOrigin, stationDestination);
+        priceText.text = "BUY TICKETS - RP. "+ ticketPrice.ToString();
 
     }
+
+    public void ContinuePurchase()
+    {
+        PlayerPrefs.SetString("stationOrigin",stationOrigin);
+        PlayerPrefs.SetString("stationDestination",stationDestination);
+        PlayerPrefs.SetInt("ticketPrice",ticketPrice);
+        
+    }
+
+    
 }
