@@ -36,8 +36,8 @@ public class DatabaseManager : MonoBehaviour
     {
         SetupConnection();
         // AddRoutes();
-        AddTrain();
-        AddMachinist();
+        // AddTrain();
+        // AddMachinist();
 
     }
 
@@ -130,7 +130,7 @@ public class DatabaseManager : MonoBehaviour
                     connection.Open();
                     print("MySQL - Opened Connection to INSERT MACHINIST");
                     cmd.CommandText =
-                        $"INSERT IGNORE INTO machinist (machinist_name) VALUES('{name}')";
+                        $"INSERT IGNORE INTO Machinists (machinist_name) VALUES('{name}')";
                         
                              
                     cmd.ExecuteNonQuery();
