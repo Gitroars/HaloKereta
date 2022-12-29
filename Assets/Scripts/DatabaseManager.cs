@@ -35,9 +35,9 @@ public class DatabaseManager : MonoBehaviour
     private void Start()
     {
         SetupConnection();
-        AddRoutes();
-        // AddTrain();
-        // AddMachinist();
+        // AddRoutes();
+        AddTrain();
+        AddMachinist();
 
     }
 
@@ -89,7 +89,7 @@ public class DatabaseManager : MonoBehaviour
                     connection.Open();
                     print("MySQL - Opened Connection");
                     cmd.CommandText = $"INSERT IGNORE INTO Routes (station_origin,station_destination,route_price) VALUES('{origin}','{destination}',{cost})";
-                        // $"INSERT IGNORE INTO routes (station_origin,station_destination,price) VALUES('{origin}','{destination}',{cost})";
+                       
                         
                              
                     cmd.ExecuteNonQuery();
@@ -128,7 +128,7 @@ public class DatabaseManager : MonoBehaviour
                 using (connection)
                 {
                     connection.Open();
-                    print("MySQL - Opened Connection");
+                    print("MySQL - Opened Connection to INSERT MACHINIST");
                     cmd.CommandText =
                         $"INSERT IGNORE INTO machinist (machinist_name) VALUES('{name}')";
                         
@@ -162,9 +162,9 @@ public class DatabaseManager : MonoBehaviour
         foreach (string line in System.IO.File.ReadLines(train))
         {
             List<string> data = new List<string>(line.Split(','));
-            string rail = data[0];
-            string type = data[1];
-            string carriage = data[2];
+            string type = data[0];
+            int carriage = Convert.ToInt32(data[1]);
+            int machinistId = Convert.ToInt32(data[2]);
     
     
             try
@@ -174,7 +174,7 @@ public class DatabaseManager : MonoBehaviour
                     connection.Open();
                     print("MySQL - Opened Connection");
                     cmd.CommandText =
-                        $"INSERT IGNORE INTO train (railway,train_type,carriage) VALUES('{rail}','{type}',{carriage})";
+                        $"INSERT IGNORE INTO train (train_type,carriages,machinist_id) VALUES('{type}',{carriage},{machinistId})";
                         
                              
                     cmd.ExecuteNonQuery();

@@ -8,20 +8,34 @@ using TMPro;
 
 public class TicketPayment : MonoBehaviour
 {
+    public DatabaseManager dm;
     public TMP_Text idText,dateText,originText,destinationText,paymentText,priceText;
-    
+    private string ticketID, date, origin, destination, payment;
+    private int price;
+    private int userID;
 
     // Start is called before the first frame update
     void Start()
     {
+        userID = PlayerPrefs.GetInt("userID");
+
+        ticketID = GenerateTicketID();
+        idText.text = ticketID;
         
+        date = GetCurrentDate();
+        dateText.text = date;
         
-        idText.text = GenerateTicketID();
-        dateText.text = GetCurrentDate();
-        originText.text = PlayerPrefs.GetString("stationOrigin");
-        destinationText.text = PlayerPrefs.GetString("stationDestination");
-        paymentText.text = PlayerPrefs.GetString("paymentType");
-        priceText.text = "RP. "+PlayerPrefs.GetInt("ticketPrice").ToString();
+        origin  = PlayerPrefs.GetString("stationOrigin");
+        originText.text = origin;
+        
+        destination = PlayerPrefs.GetString("stationDestination");
+        destinationText.text = destination;
+        
+        payment = PlayerPrefs.GetString("paymentType");
+        paymentText.text = payment;
+        
+        price = PlayerPrefs.GetInt("ticketPrice");
+        priceText.text = "RP. "+ price.ToString();
     }
 
     // Update is called once per frame
@@ -47,5 +61,10 @@ public class TicketPayment : MonoBehaviour
     {
         string time = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
         return time;
+    }
+
+    public void ConfirmTicketPurchase()
+    {
+        dm.AddTickets(date,ticketID,price,0,userID,1,1);
     }
 }
