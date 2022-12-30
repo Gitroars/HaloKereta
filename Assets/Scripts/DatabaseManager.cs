@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using MySql.Data.MySqlClient;
@@ -217,6 +218,7 @@ public class DatabaseManager : MonoBehaviour
     
     public int GetUserID(string mobileNumber)
     {
+        
         try
         {
             using (connection)
@@ -224,13 +226,15 @@ public class DatabaseManager : MonoBehaviour
                 connection.Open();
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $"SELECT id from Users WHERE mobile_number='{mobileNumber}')";
+                cmd.CommandText = $"SELECT user_id from Users WHERE mobile_number='{mobileNumber}'";
                 var myReader = cmd.ExecuteReader();
                 
                 while (myReader.Read())
                 {
                     int userID = Convert.ToInt32(myReader.GetString(0));
                     print("User ID: "+userID);
+                    connection.Close();
+                    return userID;
                 }
                 print("MySQL - Opened Connection To GET USER ID");
             }
@@ -259,17 +263,18 @@ public class DatabaseManager : MonoBehaviour
                     while (myReader.Read())
                     {
                         int numberExist = Convert.ToInt32(myReader.GetString(0));
+                        connection.Close();
                         switch (numberExist)
                         {
                             case 1:
                                 print("Email Found!");
                                 return true; 
-                                break;
+                                
                             
                             default:
                                 print("Email Not Found!");
                                 return false;
-                                break;
+                                
                                 
                         }
                     }
@@ -300,17 +305,18 @@ public class DatabaseManager : MonoBehaviour
                 while (myReader.Read())
                 {
                     int numberExist = Convert.ToInt32(myReader.GetString(0));
+                    connection.Close();
                     switch (numberExist)
                     {
                         case 1:
                             print("Mobile Number Found!");
                             return true; 
-                            break;
+                            
                             
                         default:
                             print("Error: Mobile Number Not Found!");
                             return false;
-                            break;
+                            
                                 
                     }
                 }
@@ -367,8 +373,49 @@ public class DatabaseManager : MonoBehaviour
         return false;
     }
 
-    
-    public int GetRoutePrice(string origin, string destination)
+    public Dictionary<string,int> GetStationDict()
+    {
+        
+        Dictionary<string,int> stationDict = new Dictionary<string, int>();
+        try
+        {
+            using (connection)
+            {
+
+                connection.Open();
+                print("MySQL - Opened Connection To GET STATIONS");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT * from Stations";
+                var myReader = cmd.ExecuteReader();
+                while (myReader.HasRows)
+                {
+                    
+                    while (myReader.Read())
+                    {
+                        stationDict.Add(myReader.GetString(1),myReader.GetInt32(0));
+                    }
+                    myReader.NextResult();
+                    
+                }
+
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+                return stationDict;
+                
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+
+        return null;
+    } 
+    public int GetRoutePrice(int originId,int destinationId)
     {
         
         try
@@ -380,12 +427,13 @@ public class DatabaseManager : MonoBehaviour
                 print("MySQL - Opened Connection To GET ROUTE PRICE");
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $" SELECT route_price from Routes WHERE station_origin='{origin}' AND station_destination = '{destination}'";
+                cmd.CommandText = $" SELECT route_price from Routes WHERE station_origin_id='{originId}' AND station_destination_id = '{destinationId}'";
                 var myReader = cmd.ExecuteReader();
                 
                 while (myReader.Read())
                 {
                     int routePrice = Convert.ToInt32((myReader.GetString(0)));
+                    connection.Close();
                     return routePrice;
                 }
                 

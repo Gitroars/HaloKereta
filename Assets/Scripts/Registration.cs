@@ -15,7 +15,7 @@ public class Registration : MonoBehaviour
     public TMP_InputField phoneNumberField,nameField,ageField,emailField,createPinField,confirmPinField;
     public TMP_Dropdown genderDropdown;
 
-    private string phoneNumber,name,email,gender;
+    private string phoneNumber,userName,email,gender;
     private char newGender;
     private int age;
     
@@ -37,14 +37,14 @@ public class Registration : MonoBehaviour
     public void ContinueRegistration()
     {
         phoneNumber = "62"+phoneNumberField.text;
-        name = nameField.text;
+        userName = nameField.text;
         age = Convert.ToInt32(ageField.text);
         email = emailField.text;
         gender = genderDropdown.options[genderDropdown.value].text;
         newGender = ConvertGender(gender);
         
 
-        bool nameValid = IsNameValid(name);
+        bool nameValid = IsNameValid(userName);
         bool ageValid = IsAgeValid(age);
         bool phoneNumberValid = IsNumberValid(phoneNumber);
         
@@ -132,7 +132,7 @@ public class Registration : MonoBehaviour
         string confirmPin = confirmPinField.text;
         if (createPin.Length ==6 && createPin == confirmPin)
         {
-            dm.AddUser(name,email,phoneNumber,createPin,newGender,age);
+            dm.AddUser(userName,email,phoneNumber,createPin,newGender,age);
             SceneManager.LoadScene("(1) StartPage");
         }
     }

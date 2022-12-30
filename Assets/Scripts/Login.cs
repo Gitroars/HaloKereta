@@ -51,7 +51,7 @@ public class Login : MonoBehaviour
         {
             int currentUserID = dm.GetUserID(mobileNumber);
             PlayerPrefs.SetInt("userID",currentUserID);
-            SceneManager.LoadScene("(1) StartPage");
+            SceneManager.LoadScene("(4) MenuPage");
         }
         else if(!pinIsCorrect)
         {
