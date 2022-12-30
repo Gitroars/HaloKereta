@@ -76,10 +76,10 @@ public class DatabaseManager : MonoBehaviour
         foreach (string line in System.IO.File.ReadLines(path))
         {
             List<string> data = new List<string>(line.Split(','));
-            string id = data[0];
-            string originId = data[1];
-            string destinationId = data[2];
-            string cost = data[3];
+            var id = data[0];
+            var originId = data[1];
+            var destinationId = data[2];
+            var cost = data[3];
             
             
             try
