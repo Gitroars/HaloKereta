@@ -35,7 +35,7 @@ public class DatabaseManager : MonoBehaviour
     private void Start()
     {
         SetupConnection();
-        // AddRoutes();
+        AddRoutes();
         // AddTrain();
         // AddMachinist();
 
@@ -76,9 +76,10 @@ public class DatabaseManager : MonoBehaviour
         foreach (string line in System.IO.File.ReadLines(path))
         {
             List<string> data = new List<string>(line.Split(','));
-            string origin = data[0];
-            string destination = data[1];
-            string cost = data[2];
+            string id = data[0];
+            string originId = data[1];
+            string destinationId = data[2];
+            string cost = data[3];
             
             
             try
@@ -87,11 +88,8 @@ public class DatabaseManager : MonoBehaviour
                 using (connection)
                 {
                     connection.Open();
-                    print("MySQL - Opened Connection");
-                    cmd.CommandText = $"INSERT IGNORE INTO Routes (station_origin,station_destination,route_price) VALUES('{origin}','{destination}',{cost})";
-                       
-                        
-                             
+                    print("MySQL - Opened Connection to Routes");
+                    cmd.CommandText = $"INSERT IGNORE INTO Routes (route_id,station_origin_id,station_destination_id,route_price) VALUES({id},{originId},{destinationId},{cost})";
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -369,6 +367,7 @@ public class DatabaseManager : MonoBehaviour
         return false;
     }
 
+    
     public int GetRoutePrice(string origin, string destination)
     {
         
@@ -399,7 +398,7 @@ public class DatabaseManager : MonoBehaviour
         connection.Close();
 
         return 0;
-    }
+    } 
     public void AddTickets(string TransactionDate,string IdTicket, int TicketPrice, int TicketStatus, int IdUser, int IdTrain, int IdPayment)
     {
         
