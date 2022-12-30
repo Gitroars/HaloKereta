@@ -1345,7 +1345,7 @@ MonoBehaviour:
   pinNumberField: {fileID: 1152699234}
   dm: {fileID: 730844344}
   warningPhoneText: {fileID: 801847430}
-  warningPinText: {fileID: 0}
+  warningPinText: {fileID: 529121197}
 --- !u!1 &801847430
 GameObject:
   m_ObjectHideFlags: 0
