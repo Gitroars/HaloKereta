@@ -1,23 +1,36 @@
-Bundaran HI,Dukuh Atas BNI,3000
-Bundaran HI,Setiabudi Astra,4000
-Bundaran HI,Bendungan Hilir,4000
-Bundaran HI,Istora Mandiri,5000
-Bundaran HI,Senayan,6000
-Bundaran HI,ASEAN,7000
-Bundaran HI,Blok M BCA,8000
-Bundaran HI,Blok A,9000
-Bundaran HI,Haji Nawi,10000
-Bundaran HI,Cipete Raya,11000
-Bundaran HI,Fatmwati Indomaret,13000
-Bundaran HI,Lebak Bulus Grab,14000
-Bundaran HI,Dukuh Atas BNI,3000
-Bundaran HI,Setiabudi Astra,4000
-Bundaran HI,Bendungan Hilir,4000
-Bundaran HI,Istora Mandiri,5000
-Bundaran HI,Senayan,6000
-Bundaran HI,ASEAN,7000
-Bundaran HI,Blok M BCA,8000
-Bundaran HI,Blok A,9000
-Bundaran HI,Cipete Raya,11000
-Bundaran HI,Fatmwati Indomaret,13000
-Bundaran HI,Lebak Bulus Grab,14000
+1,1,2,4000
+2,1,3,5000
+3,1,4,6000
+4,1,5,7000
+5,1,6,8000
+6,1,7,9000
+7,1,8,10000
+8,1,9,11000
+9,1,10,12000
+10,1,11,13000
+11,1,12,14000
+12,1,13,14000
+13,2,1,4000
+14,2,3,4000
+15,2,4,5000
+16,2,5,6000
+17,2,6,7000
+18,2,7,7000
+19,2,8,9000
+20,2,9,9000
+21,2,10,10000
+22,2,11,11000
+23,2,12,12000
+24,2,13,13000
+25,3,1,5000
+26,3,2,4000
+27,3,4,3000
+28,3,5,4000
+29,3,6,5000
+30,3,7,6000
+31,3,8,7000
+32,9,8000
+33,3,10,9000
+34,3,11,9000
+35,3,12,10000
+36,3,13,11000
