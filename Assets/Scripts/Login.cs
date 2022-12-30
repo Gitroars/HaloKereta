@@ -10,6 +10,7 @@ public class Login : MonoBehaviour
     public GameObject numberCanvas, pinCanvas;
     public TMP_InputField phoneNumberField,pinNumberField;
     public DatabaseManager dm;
+    public GameObject warningPhoneText,warningPinText;
 
     private string mobileNumber, pinNumber;
     // Start is called before the first frame update
@@ -36,6 +37,10 @@ public class Login : MonoBehaviour
             numberCanvas.SetActive(false);
             pinCanvas.SetActive(true);
         }
+        else
+        {
+            warningPhoneText.SetActive(true);
+        }
     }
 
     public void AttemptLogin()
@@ -50,7 +55,7 @@ public class Login : MonoBehaviour
         }
         else if(!pinIsCorrect)
         {
-            print("Incorrect PIN");
+            warningPinText.SetActive(true);
         }
     }
     

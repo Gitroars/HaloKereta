@@ -35,7 +35,7 @@ public class DatabaseManager : MonoBehaviour
     private void Start()
     {
         SetupConnection();
-        AddRoutes();
+        // AddRoutes();
         // AddTrain();
         // AddMachinist();
 
@@ -89,7 +89,7 @@ public class DatabaseManager : MonoBehaviour
                 {
                     connection.Open();
                     print("MySQL - Opened Connection to Routes");
-                    cmd.CommandText = $"INSERT IGNORE INTO Routes (route_id,station_origin_id,station_destination_id,route_price) VALUES({id},{originId},{destinationId},{cost})";
+                    cmd.CommandText = $"INSERT IGNORE INTO Routes (route_id,station_origin_id,station_destination_id,route_price) VALUES('{id}','{originId}','{destinationId}','{cost}')";
                     cmd.ExecuteNonQuery();
                 }
             }
