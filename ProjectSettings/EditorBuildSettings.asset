@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/(1) StartPage.unity
     guid: 3db8c000dc494c1449a48328641e0138
   - enabled: 1
-    path: Assets/Scenes/(3) RegistrationPage.unity
+    path: Assets/Scenes/(3) RegistrationPage1.unity
     guid: 7cd4690d9da09744b9e97e80f4ab2ca8
   - enabled: 1
     path: Assets/Scenes/(4) MenuPage.unity
