@@ -77,12 +77,12 @@ public class TicketScript : MonoBehaviour
             t.transform.GetChild(2).GetComponent<Text>().text = ticketId;
             t.transform.GetChild(3).GetComponent<Text>().text = routePrice.ToString();
             t.transform.GetChild(4).GetComponent<Text>().text = dm.GetPayTypeName(payId);
-            Button tapButton = t.transform.GetChild(5).GetComponent<Button>();
-            void onClick()
-            {
-                dm.ChangeTicketStatus(ticketId,statusId+1);
-            }
-            tapButton.onClick.AddListener(onClick);
+            // Button tapButton = t.transform.GetChild(5).GetComponent<Button>();
+            // void onClick()
+            // {
+            //     dm.ChangeTicketStatus(ticketId,statusId+1);
+            // }
+            // tapButton.onClick.AddListener(onClick);
             
             string tapValue = "";
             switch (statusId)
