@@ -80,17 +80,19 @@ public class PriceCalculator : MonoBehaviour
         
         List<string> tempList = stationList;
         
-        string currentVal = destinationDropdown.options[destinationDropdown.value].text;
-        
+        string currentDestVal = destinationDropdown.options[destinationDropdown.value].text;
+        string currentOriginVal = originDropdown.options[originDropdown.value].text;
         originDropdown.ClearOptions();
         
-        tempList.Remove(currentVal);
-        
+        tempList.Remove(currentDestVal);
+        print("Updating origin...");
         foreach (string station in tempList)
         {
             originDropdown.options.Add(new TMP_Dropdown.OptionData(){text = station});
+            print(station);
         }
         originDropdown.RefreshShownValue();
+        
         
     }
     void UpdateDestinationList()
@@ -98,12 +100,13 @@ public class PriceCalculator : MonoBehaviour
         
         List<string> tempList = stationList;
         
-        string currentVal = originDropdown.options[originDropdown.value].text;
+        string currentOriginVal = originDropdown.options[originDropdown.value].text;
         
             
         
         destinationDropdown.ClearOptions();
-        tempList.Remove(currentVal);
+        tempList.Remove(currentOriginVal);
+        print("Updating originlist...");
         foreach (string item in tempList)
         {
             print(item);
