@@ -48,4 +48,6 @@ public class TicketPayType : MonoBehaviour
         PlayerPrefs.SetString("paymentTypeName",paymentType);
         PlayerPrefs.SetInt("paymentTypeId",paymentId);
     }
+
+    
 }

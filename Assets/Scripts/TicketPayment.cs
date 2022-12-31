@@ -9,7 +9,7 @@ public class TicketPayment : MonoBehaviour
 {
     public DatabaseManager dm;
     public TMP_Text idText,originText,destinationText,paymentText,priceText;
-    private string ticketID, date, origin, destination, payment;
+    private string ticketID, origin, destination, payment;
     private int price;
     private int userID;
 
@@ -21,7 +21,7 @@ public class TicketPayment : MonoBehaviour
         ticketID = GenerateTicketID();
         idText.text = ticketID;
         
-        date = GetCurrentDate();
+        
         
         
         origin  = PlayerPrefs.GetString("stationOrigin");
@@ -42,6 +42,13 @@ public class TicketPayment : MonoBehaviour
     {
         
     }
+    public void ConfirmTicketPurchase()
+    {
+        int paymentId = PlayerPrefs.GetInt("paymentId");
+        string date = GetCurrentDate();
+        string time = GetCurrentTime();
+        dm.AddTickets(ticketID, 1, userID, paymentId, date, time);
+    }
     // Reference: https://www.youtube.com/watch?v=WaWI60hYOzo
     string GenerateTicketID() 
     {
@@ -58,15 +65,15 @@ public class TicketPayment : MonoBehaviour
 
     string GetCurrentDate()
     {
-        string date = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
+        string date = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy");
         return date;
     }
 
-    public void ConfirmTicketPurchase()
+    string GetCurrentTime()
     {
-        int paymentId = PlayerPrefs.GetInt("paymentId");
-        dm.AddTickets(date,ticketID,price,1,userID,paymentId);
-        
-        
+        string time = System.DateTime.UtcNow.ToLocalTime().ToString("HH:mm");
+        return time;
     }
+
+    
 }

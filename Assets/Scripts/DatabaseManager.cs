@@ -30,6 +30,27 @@ public class DatabaseManager : MonoBehaviour
     
 
     #endregion
+    
+    #region CLASSES
+
+    public class Ticket
+    {
+        public string TicketId;
+        public int UserId, RouteId, PaymentId, StatusId;
+        public string Date,Time;
+        public Ticket(string ticketId, int userId, int routeId, int paymentId, int statusId, string date, string time)
+        {
+            TicketId = ticketId;
+            UserId = userId;
+            RouteId = routeId;
+            PaymentId = paymentId;
+            StatusId = statusId;
+            
+            Date = date;
+            Time = time;
+        }
+    }
+    #endregion
 
     #region UNITY METHODS
     
@@ -491,7 +512,7 @@ public class DatabaseManager : MonoBehaviour
 
         return null;
     } 
-    public void AddTickets(string transactionDate,string ticketId, int ticketPrice, int ticketStatus, int userId, int paymentId)
+    public void AddTickets(string ticketId, int ticketStatus, int userId, int paymentId,string date,string time)
     {
         
         using var cmd = new MySqlCommand();
@@ -512,8 +533,8 @@ public class DatabaseManager : MonoBehaviour
                     connection.Open();
                     print("MySQL - Opened Connection");
                     cmd.CommandText =
-                        $"INSERT IGNORE INTO Tickets (ticket_id,price,status,user_id,train_id,payment_id,transaction_time,transaction_date) VALUES('{transactionDate}','{ticketId}',{ticketPrice}," +
-                        $"{ticketStatus},{userId},{paymentId})";
+                        $"INSERT IGNORE INTO Tickets (ticket_id,status_id,user_id,train_id,payment_id,transaction_date,transaction_time) VALUES('{ticketId}'," +
+                        $"{ticketStatus},{userId},{paymentId},'{date}','{time}')";
                         
                              
                     cmd.ExecuteNonQuery();
@@ -532,6 +553,57 @@ public class DatabaseManager : MonoBehaviour
         print("Successfully added new Ticket");
     
     
+    }
+
+    public List<Ticket> GetUserOngoingTickets(int userId)
+    {
+        List<Ticket> ongoingTicketList = new List<Ticket>();
+        string currentDate = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy");
+        try
+        {
+            using (connection)
+            {
+                
+                connection.Open();
+                print("MySQL - Opened Connection To GET ROUTE PRICE");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText =
+                    $" SELECT * from Tickets WHERE user_id = {userId} AND transaction_datetime = {currentDate}";
+                                  
+                var myReader = cmd.ExecuteReader();
+                
+                while (myReader.HasRows)
+                {
+                    while (myReader.Read())
+                    {
+                        string ticketId = myReader.GetString(0);
+                        int routeId = Convert.ToInt32(myReader.GetString(1));
+                        int statusId = Convert.ToInt32(myReader.GetString(2));
+                        int paymentId = Convert.ToInt32(myReader.GetString(3));
+                        string date = myReader.GetString(4);
+                        string time = myReader.GetString(5);
+                        Ticket ongoingTicket = new Ticket(ticketId,userId,routeId,paymentId,statusId,date,time);
+                        ongoingTicketList.Add(ongoingTicket);
+                    }
+                    myReader.NextResult();
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+                connection.Close();
+                return ongoingTicketList;
+
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+
+        return null;
     }
     
     
