@@ -35,9 +35,16 @@ public class QRCodeGenerator : MonoBehaviour
                 Height = height,
                 Width = width
             }
-
         };
         return writer.Write(textForEncoding);
+    }
+
+    void EncodeTextToQrCode(string textWrite)
+    {
+        Color32[] convertPixelToTexture = Encode(textWrite, _storeEncodedTexture.width, _storeEncodedTexture.height);
+        _storeEncodedTexture.SetPixels32(convertPixelToTexture);
+        _storeEncodedTexture.Apply();
+        _rawImageReceiver.texture = _storeEncodedTexture;
     }
 
 

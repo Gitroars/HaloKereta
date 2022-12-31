@@ -24,13 +24,13 @@ public class TicketPayment : MonoBehaviour
         
         
         
-        origin  = PlayerPrefs.GetString("stationOrigin");
+        origin  = PlayerPrefs.GetString("stationOriginName");
         originText.text = origin;
         
-        destination = PlayerPrefs.GetString("stationDestination");
+        destination = PlayerPrefs.GetString("stationDestName");
         destinationText.text = destination;
         
-        payment = PlayerPrefs.GetString("paymentType");
+        payment = PlayerPrefs.GetString("paymentTypeName");
         paymentText.text = payment;
         
         price = PlayerPrefs.GetInt("ticketPrice");

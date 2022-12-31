@@ -13,6 +13,7 @@ public class PriceCalculator : MonoBehaviour
     public TMP_Dropdown originDropdown,destinationDropdown;
 
     public TMP_Text priceText;
+    public Button button;
     
     private string stationOrigin, stationDestination;
 
@@ -20,7 +21,7 @@ public class PriceCalculator : MonoBehaviour
 
     private int originId = 0, destId = 0;
 
-    private bool firstClick = false;
+    public GameObject warnText;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,21 +32,45 @@ public class PriceCalculator : MonoBehaviour
         
         originDropdown.onValueChanged.AddListener(delegate
         {
-            UpdateDestinationList();
             
-            destinationDropdown.interactable = true;
-            if (originId != 0 && destId != 0)
+            
+            SetCurrentOriginId();
+            if (originId != destId)
             {
-                CalculatePrice();
+                ValidDropdownChange();
+            }
+            else
+            {
+                InvalidDropdownChange();
             }
         });
         
         destinationDropdown.onValueChanged.AddListener(delegate
         {
             
-            UpdateOriginList();
-            CalculatePrice();
+            SetCurrentOriginId();
+            if (originId != destId)
+            {
+                ValidDropdownChange();
+            }
+            else
+            {
+                InvalidDropdownChange();
+            }
         });
+    }
+
+    public void ValidDropdownChange()
+    {
+        CalculatePrice();
+        button.interactable = true;
+        warnText.SetActive(false);
+    }
+
+    public void InvalidDropdownChange()
+    {
+        button.interactable = false;
+        warnText.SetActive(true);
     }
 
     // Update is called once per frame
@@ -67,63 +92,25 @@ public class PriceCalculator : MonoBehaviour
         }
         //Set dropdown values based on string list
         originDropdown.ClearOptions();
-        originDropdown.options.Add(new TMP_Dropdown.OptionData(){text = ""});
+        destinationDropdown.ClearOptions();
+        
         foreach (string station in stationList)
         {
             originDropdown.options.Add(new TMP_Dropdown.OptionData(){text = station});
-        }
-        originDropdown.RefreshShownValue();
-        
-    }
-    void UpdateOriginList()
-    {
-        
-        List<string> tempList = stationList;
-        
-        string currentVal = destinationDropdown.options[destinationDropdown.value].text;
-        
-        originDropdown.ClearOptions();
-        
-        tempList.Remove(currentVal);
-        
-        foreach (string station in tempList)
-        {
-            originDropdown.options.Add(new TMP_Dropdown.OptionData(){text = station});
-        }
-        originDropdown.RefreshShownValue();
-        
-    }
-    void UpdateDestinationList()
-    {
-        
-        List<string> tempList = stationList;
-        
-        string currentVal = originDropdown.options[originDropdown.value].text;
-        
-            
-        
-        destinationDropdown.ClearOptions();
-        tempList.Remove(currentVal);
-        foreach (string item in tempList)
-        {
-            print(item);
-        }
-        if (!firstClick)
-        {
-            destinationDropdown.options.Add(new TMP_Dropdown.OptionData(){text = ""});
-            firstClick = false;
-        }
-        
-        foreach (string station in tempList)
-        {
             destinationDropdown.options.Add(new TMP_Dropdown.OptionData(){text = station});
         }
+        
+        
+        originDropdown.RefreshShownValue();
         destinationDropdown.RefreshShownValue();
+        
     }
+    
+    
 
     void CalculatePrice()
     {
-        SetCurrentOriginId();
+        
         ticketPrice = dm.GetRoutePrice(originId, destId);
         priceText.text = "BUY TICKET - RP. "+ ticketPrice.ToString();
 
@@ -131,11 +118,16 @@ public class PriceCalculator : MonoBehaviour
 
     public void ContinuePurchase()
     {
-        PlayerPrefs.SetString("stationOriginName", originDropdown.options[originDropdown.value].text);
-        PlayerPrefs.SetString("stationDestName",destinationDropdown.options[destinationDropdown.value].text)
-;       PlayerPrefs.SetInt("stationOriginId",originId);
-        PlayerPrefs.SetInt("stationDestinationId",destId);
-        PlayerPrefs.SetInt("ticketPrice",ticketPrice);
+        if (originId != destId)
+        {
+            PlayerPrefs.SetString("stationOriginName", originDropdown.options[originDropdown.value].text);
+            PlayerPrefs.SetString("stationDestName",destinationDropdown.options[destinationDropdown.value].text);       
+            PlayerPrefs.SetInt("stationOriginId",originId);
+            PlayerPrefs.SetInt("stationDestinationId",destId);
+            PlayerPrefs.SetInt("ticketPrice",ticketPrice);
+        }
+        
+        
         
     }
 
