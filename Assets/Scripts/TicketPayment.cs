@@ -27,7 +27,7 @@ public class TicketPayment : MonoBehaviour
         origin  = PlayerPrefs.GetString("stationOriginName");
         originText.text = origin;
         
-        destination = PlayerPrefs.GetString("stationDestinationName");
+        destination = PlayerPrefs.GetString("stationDestName");
         destinationText.text = destination;
         
         payment = PlayerPrefs.GetString("paymentTypeName");

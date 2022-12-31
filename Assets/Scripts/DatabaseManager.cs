@@ -608,7 +608,7 @@ public class DatabaseManager : MonoBehaviour
                 connection.Open();
                 print("MySQL - Ticket Added Successfully");
                 cmd.CommandText =
-                    $"INSERT IGNORE INTO Tickets (ticket_id,status_id,user_id,train_id,payment_id,transaction_date,transaction_time) VALUES('{ticketId}'," +
+                    $"INSERT IGNORE INTO Tickets (ticket_id,status_id,user_id,payment_id,transaction_date,transaction_time) VALUES('{ticketId}'," +
                     $"{ticketStatus},{userId},{paymentId},'{date}','{time}')";
 
 
@@ -645,7 +645,7 @@ public class DatabaseManager : MonoBehaviour
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
                 cmd.CommandText =
-                    $" SELECT * from Tickets WHERE user_id = {userId} AND NOT (ticket_status_id = 4 OR ticket_status_id = 5)";
+                    $" SELECT * from Tickets WHERE user_id = {userId} AND NOT (status_id = 4 OR status_id = 5)";
                                   
                 var myReader = cmd.ExecuteReader();
                 
@@ -695,7 +695,7 @@ public class DatabaseManager : MonoBehaviour
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
                 cmd.CommandText =
-                    $" SELECT * from Tickets WHERE user_id = {userId} AND  (ticket_status_id = 4 OR ticket_status_id = 5)";
+                    $" SELECT * from Tickets WHERE user_id = {userId} AND  (status_id = 4 OR status_id = 5)";
                                   
                 var myReader = cmd.ExecuteReader();
                 

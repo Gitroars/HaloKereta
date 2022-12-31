@@ -32,7 +32,7 @@ public class TicketScript : MonoBehaviour
         
         RetrieveOngoingTicket();
         RetrieveHistoryTickets();
-        
+        DisplayOngoingTickets();
     } 
 
     // Update is called once per frame
