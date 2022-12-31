@@ -131,9 +131,10 @@ public class PriceCalculator : MonoBehaviour
 
     public void ContinuePurchase()
     {
-        
-;       PlayerPrefs.SetInt("stationOrigins",originId);
-        PlayerPrefs.SetInt("stationDestination",destId);
+        PlayerPrefs.SetString("stationOriginName", originDropdown.options[originDropdown.value].text);
+        PlayerPrefs.SetString("stationDestName",destinationDropdown.options[destinationDropdown.value].text)
+;       PlayerPrefs.SetInt("stationOriginId",originId);
+        PlayerPrefs.SetInt("stationDestinationId",destId);
         PlayerPrefs.SetInt("ticketPrice",ticketPrice);
         
     }

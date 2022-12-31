@@ -28,7 +28,7 @@ public class SceneTransit : MonoBehaviour
 
     public void OpenPaymentPage()
     {
-        SceneManager.LoadScene("(6) PaymentPage");
+        SceneManager.LoadScene("(6) Payment");
     }
 
     public void OpenTicketPage()

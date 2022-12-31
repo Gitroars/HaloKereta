@@ -375,6 +375,7 @@ public class DatabaseManager : MonoBehaviour
 
     public Dictionary<string,int> GetStationDict()
     {
+       
         
         Dictionary<string,int> stationDict = new Dictionary<string, int>();
         try
@@ -447,7 +448,50 @@ public class DatabaseManager : MonoBehaviour
 
         return 0;
     } 
-    public void AddTickets(string TransactionDate,string IdTicket, int TicketPrice, int TicketStatus, int IdUser, int IdTrain, int IdPayment)
+    public Dictionary<string,int> GetPayTypeDict()
+    {
+       
+        
+        Dictionary<string,int> payTypeDict = new Dictionary<string, int>();
+        try
+        {
+            using (connection)
+            {
+
+                connection.Open();
+                print("MySQL - Opened Connection To GET Payment Type");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT * from Payments";
+                var myReader = cmd.ExecuteReader();
+                while (myReader.HasRows)
+                {
+                    
+                    while (myReader.Read())
+                    {
+                        payTypeDict.Add(myReader.GetString(1),myReader.GetInt32(0));
+                    }
+                    myReader.NextResult();
+                    
+                }
+
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+                return payTypeDict;
+                
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+
+        return null;
+    } 
+    public void AddTickets(string transactionDate,string ticketId, int ticketPrice, int ticketStatus, int userId, int paymentId)
     {
         
         using var cmd = new MySqlCommand();
@@ -468,7 +512,8 @@ public class DatabaseManager : MonoBehaviour
                     connection.Open();
                     print("MySQL - Opened Connection");
                     cmd.CommandText =
-                        $"INSERT IGNORE INTO Tickets (Transaction_Date,ticket_id,price,status,user_id,train_id,payment_id) VALUES('{TransactionDate}','{IdTicket}','{IdUser}','{IdTrain}','{IdPayment}')";
+                        $"INSERT IGNORE INTO Tickets (ticket_id,price,status,user_id,train_id,payment_id,transaction_time,transaction_date) VALUES('{transactionDate}','{ticketId}',{ticketPrice}," +
+                        $"{ticketStatus},{userId},{paymentId})";
                         
                              
                     cmd.ExecuteNonQuery();

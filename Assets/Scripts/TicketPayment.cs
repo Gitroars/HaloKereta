@@ -8,7 +8,7 @@ using TMPro;
 public class TicketPayment : MonoBehaviour
 {
     public DatabaseManager dm;
-    public TMP_Text idText,dateText,originText,destinationText,paymentText,priceText;
+    public TMP_Text idText,originText,destinationText,paymentText,priceText;
     private string ticketID, date, origin, destination, payment;
     private int price;
     private int userID;
@@ -22,7 +22,7 @@ public class TicketPayment : MonoBehaviour
         idText.text = ticketID;
         
         date = GetCurrentDate();
-        dateText.text = date;
+        
         
         origin  = PlayerPrefs.GetString("stationOrigin");
         originText.text = origin;
@@ -58,12 +58,15 @@ public class TicketPayment : MonoBehaviour
 
     string GetCurrentDate()
     {
-        string time = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
-        return time;
+        string date = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy HH:mm");
+        return date;
     }
 
     public void ConfirmTicketPurchase()
     {
-        dm.AddTickets(date,ticketID,price,0,userID,1,1);
+        int paymentId = PlayerPrefs.GetInt("paymentId");
+        dm.AddTickets(date,ticketID,price,1,userID,paymentId);
+        
+        
     }
 }
