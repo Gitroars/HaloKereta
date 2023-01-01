@@ -1577,12 +1577,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberCanvas: {fileID: 1406272756}
-  pinCanvas: {fileID: 0}
+  pinCanvas: {fileID: 332548807}
   phoneNumberField: {fileID: 1543545888}
-  pinNumberField: {fileID: 0}
+  pinNumberField: {fileID: 703120174}
   dm: {fileID: 730844344}
   warningPhoneText: {fileID: 801847430}
-  warningPinText: {fileID: 0}
+  warningPinText: {fileID: 932530116}
 --- !u!1 &801847430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3366,7 +3366,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1978359978}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730844345}
+        m_TargetAssemblyTypeName: Login, Assembly-CSharp
+        m_MethodName: AttemptLogin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1978359978
 MonoBehaviour:
   m_ObjectHideFlags: 0

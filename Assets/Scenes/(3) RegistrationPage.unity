@@ -2523,8 +2523,8 @@ MonoBehaviour:
   nameField: {fileID: 1617873044}
   ageField: {fileID: 424695982}
   emailField: {fileID: 1390731448}
-  createPinField: {fileID: 0}
-  confirmPinField: {fileID: 0}
+  createPinField: {fileID: 1284280141}
+  confirmPinField: {fileID: 1812321679}
   genderDropdown: {fileID: 38958626}
 --- !u!1 &759751927
 GameObject:
@@ -3952,7 +3952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1276146757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4678,7 +4678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1406272757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6259,7 +6259,7 @@ GameObject:
   - component: {fileID: 1812321680}
   - component: {fileID: 1812321679}
   m_Layer: 5
-  m_Name: AgeField
+  m_Name: ConfirmPINField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
