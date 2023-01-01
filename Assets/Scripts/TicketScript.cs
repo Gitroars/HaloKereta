@@ -83,7 +83,10 @@ public class TicketScript : MonoBehaviour
             idText.text = "Ticket Number "+ currentTicketId.ToString();
             priceText.text = "Rp. " + dm.GetRoutePriceFromId(currentTicketRouteId).ToString();
             walletText.text = dm.GetPayTypeName(_ongoingTicketList[currentPageIndex].PaymentId);
-            dateText.text = _ongoingTicketList[currentPageIndex].Date;
+            string dateTime = _ongoingTicketList[currentPageIndex].Time;
+            dateTime.Replace(".", ":");
+            dateText.text = dateTime;
+            
             if (currentTicketStatusId == 1)
             {
                 tapText.text = "TAP IN";
