@@ -12,6 +12,7 @@ public class TicketPayment : MonoBehaviour
     private string ticketID, origin, destination, payment;
     private int price;
     private int userID,originId,destId,routeId;
+    public TMP_Text  paymentTypeText, ticketIdText, originText, destText,priceText;
     private bool roundTrip = false;
 
     // Start is called before the first frame update
@@ -37,13 +38,22 @@ public class TicketPayment : MonoBehaviour
         
         
         price = PlayerPrefs.GetInt("ticketPrice");
-        
+        DisplayTicketData();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void DisplayTicketData()
+    {
+        paymentTypeText.text = payment;
+        ticketIdText.text = ticketID;
+        originText.text = origin;
+        destText.text = destination;
+        priceText.text = price.ToString();
     }
     public void ConfirmTicketPurchase()
     {
@@ -80,7 +90,7 @@ public class TicketPayment : MonoBehaviour
 
     string GetCurrentTime()
     {
-        string time= System.DateTime.UtcNow.ToLocalTime().ToString("HH:mm:ss");
+        string time= System.DateTime.UtcNow.ToLocalTime().ToString("yyyy-M-d HH:mm:ss");
         time = time.Replace(".", ":");
         return time;
     }

@@ -670,7 +670,7 @@ public class DatabaseManager : MonoBehaviour
     }
     #endregion
 
-    public void AddTickets(int ticketStatus, int userId, int paymentId,int routeId,string iDate,string iTime)
+    public void AddTickets(int ticketStatus, int userId, int paymentId,int routeId,string iDate,string iDateTime)
     {
         
         try
@@ -687,7 +687,7 @@ public class DatabaseManager : MonoBehaviour
                 print("Ticket paymentID: "+ paymentId);
                 print("Ticket routeId: "+ routeId);
                 print("-----------------------------");
-                cmd.CommandText = $"INSERT  INTO Tickets (status_id,user_id,payment_id,route_id,transaction_date,transaction_time) VALUES('{ticketStatus}','{userId}','{paymentId}','{routeId}','{iDate}','{iTime}')";
+                cmd.CommandText = $"INSERT  INTO Tickets (status_id,user_id,payment_id,route_id,transaction_date,transaction_datetime) VALUES('{ticketStatus}','{userId}','{paymentId}','{routeId}','{iDate}','{iDateTime}')";
                 cmd.ExecuteNonQuery();
             }
         }
@@ -731,13 +731,14 @@ public class DatabaseManager : MonoBehaviour
                         int  ticketId = Convert.ToInt32(myReader.GetString(0));
                         
                         int routeId = Convert.ToInt32(myReader.GetString(4));
-                        int statusId = myReader.GetInt32(1);
+                        int statusId = Convert.ToInt32(myReader.GetString(1));
                         int paymentId = Convert.ToInt32(myReader.GetString(3));
                         string dateDb = myReader.GetString(5);
                         string timeDb = myReader.GetString(6);
                         print("i:"+ticketId+"r:"+routeId+"s:"+statusId+"p:"+paymentId);
                         Ticket ongoingTicket = new Ticket(ticketId,userId,routeId,paymentId,statusId,dateDb,timeDb);
                         ongoingTicketList.Add(ongoingTicket);
+                        print("found ticket with status id "+statusId);
                     }
                     myReader.NextResult();
                 }
@@ -768,7 +769,7 @@ public class DatabaseManager : MonoBehaviour
             using (connection)
             {
                 connection.Open();
-                print("MySQL - Ticket Status Modified Successfully");
+                print("MySQL - Ticket " + ticketId + " Status Modified to " + newStatus);
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
                 cmd.CommandText = $"UPDATE Tickets SET status_id = '{newStatus}' WHERE ticket_id = '{ticketId}'";
