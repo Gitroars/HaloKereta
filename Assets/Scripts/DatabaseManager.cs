@@ -153,6 +153,7 @@ public class DatabaseManager : MonoBehaviour
 
     #endregion
 
+    #region User Functions
     public void AddUser(string fullName, string email, string phoneNumber, string pin, char gender, int age)
     {
 
@@ -177,6 +178,7 @@ public class DatabaseManager : MonoBehaviour
         connection.Close();
 
     }
+    
 
     public int GetUserID(string mobileNumber)
     {
@@ -357,7 +359,212 @@ public class DatabaseManager : MonoBehaviour
 
         return false;
     }
+    #endregion
+    #region Admin Functions
+    public void AddAdmin(string fullName, string email, string phoneNumber, string pass, char gender, int age)
+    {
 
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                using var cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText =
+                    $"INSERT IGNORE INTO Admins(full_name,email,mobile_number,password,sex,age) VALUES ('{fullName}','{email}','{phoneNumber}','{pass}','{gender}',{age})";
+                cmd.ExecuteNonQuery();
+                print("MySQL - Opened Connection TO ADD ADMIN");
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        connection.Close();
+
+    }
+    public int GetAdminID(string mobileNumber)
+    {
+
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $"SELECT admin_id from Admins WHERE mobile_number='{mobileNumber}'";
+                var myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    int userID = Convert.ToInt32(myReader.GetString(0));
+                    print("User ID: " + userID);
+                    connection.Close();
+                    return userID;
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+
+                print("MySQL - Opened Connection To GET USER ID");
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        connection.Close();
+
+        return 0;
+    }
+    public Boolean CheckAdminEmail(string email)
+    {
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT EXISTS(SELECT * from Admins WHERE email='{email}')";
+                var myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    int numberExist = Convert.ToInt32(myReader.GetString(0));
+                    connection.Close();
+                    switch (numberExist)
+                    {
+                        case 1:
+                            print("Email Found!");
+                            return true;
+
+
+                        default:
+                            print("Email Not Found!");
+                            return false;
+
+
+                    }
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+
+                print("MySQL - Opened Connection To Check Email");
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        connection.Close();
+
+        return false;
+    }
+
+    public Boolean CheckAdminNumber(string phoneNumber)
+    {
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT EXISTS(SELECT * from Admins WHERE mobile_number='{phoneNumber}')";
+                var myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    int numberExist = Convert.ToInt32(myReader.GetString(0));
+                    connection.Close();
+                    switch (numberExist)
+                    {
+                        case 1:
+                            print("Mobile Number Found!");
+                            return true;
+
+
+                        default:
+                            print("Error: Mobile Number Not Found!");
+                            return false;
+
+
+                    }
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+
+                print("MySQL - Opened Connection To Check Mobile Number");
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        connection.Close();
+
+        return false;
+    }
+
+    public Boolean CheckAdminPassword(string mobileNumber, string pinNumber)
+    {
+        print("Login Number" + mobileNumber);
+        print("Login PIN " + pinNumber);
+        try
+        {
+            using (connection)
+            {
+
+                connection.Open();
+                print("MySQL - Opened Connection To Check Mobile Number");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $" SELECT password from Admins WHERE mobile_number='{mobileNumber}'";
+                var myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    string savedPin = (myReader.GetString(0));
+
+                    print("Stored PIN is " + savedPin);
+                    if (pinNumber == savedPin)
+                    {
+                        print("Login Success!");
+                        connection.Close();
+                        return true;
+                    }
+
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        connection.Close();
+
+        return false;
+    }
+    #endregion
+    
     public Dictionary<string, int> GetStationDict()
     {
 
@@ -404,7 +611,7 @@ public class DatabaseManager : MonoBehaviour
 
         return null;
     }
-    #region ROUTES
+    
 
     public Tuple<string,string> GetStationsFromRouteId(int routeId)
     {
@@ -668,7 +875,7 @@ public class DatabaseManager : MonoBehaviour
 
         return null;
     }
-    #endregion
+    
 
     public void AddTickets(int ticketStatus, int userId, int paymentId,int routeId,string iDate,string iDateTime)
     {

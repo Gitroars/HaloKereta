@@ -273,7 +273,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 83445086}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730844345}
+        m_TargetAssemblyTypeName: LoginAdmin, Assembly-CSharp
+        m_MethodName: PhoneLogin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &83445086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -395,7 +407,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 111244660}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730844346}
+        m_TargetAssemblyTypeName: SceneTransitAdmin, Assembly-CSharp
+        m_MethodName: OpenRegistrationPage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &111244660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -652,7 +676,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 430912095}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730844345}
+        m_TargetAssemblyTypeName: LoginAdmin, Assembly-CSharp
+        m_MethodName: AttemptLogin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &430912095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -972,7 +1008,6 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
-  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1046,18 +1081,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &519420033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7f7041bb213297488c363055fa5ab82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &593890265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,6 +1227,7 @@ GameObject:
   - component: {fileID: 730844343}
   - component: {fileID: 730844344}
   - component: {fileID: 730844345}
+  - component: {fileID: 730844346}
   m_Layer: 0
   m_Name: Admin
   m_TagString: Untagged
@@ -1247,16 +1271,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 730844342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edeff34ed39e8f34abb8828582347f61, type: 3}
+  m_Script: {fileID: 11500000, guid: ff2df0bc522e18244bd462c91dcb8d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   numberCanvas: {fileID: 1406272756}
   pinCanvas: {fileID: 1276146756}
   phoneNumberField: {fileID: 1543545888}
-  pinNumberField: {fileID: 0}
+  pinNumberField: {fileID: 781864658}
   dm: {fileID: 730844344}
   warningPhoneText: {fileID: 801847430}
-  warningPinText: {fileID: 0}
+  warningPinText: {fileID: 1712105331}
+--- !u!114 &730844346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730844342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0203ba840046474b8caffb7b713930b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &781864656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,7 +2005,7 @@ GameObject:
   - component: {fileID: 1276146758}
   - component: {fileID: 1276146757}
   m_Layer: 5
-  m_Name: PIN Canvas
+  m_Name: Pass Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2119,7 +2155,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6-digit PIN
+  m_text: Password
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2880,7 +2916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Incorrect PIN
+  m_text: Incorrect Password
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

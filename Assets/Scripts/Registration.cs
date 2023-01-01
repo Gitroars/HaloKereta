@@ -133,7 +133,7 @@ public class Registration : MonoBehaviour
         if (createPin.Length ==6 && createPin == confirmPin)
         {
             dm.AddUser(userName,email,phoneNumber,createPin,newGender,age);
-            SceneManager.LoadScene("(1) StartPage");
+            SceneManager.LoadScene("(4) MenuPage");
         }
     }
 }

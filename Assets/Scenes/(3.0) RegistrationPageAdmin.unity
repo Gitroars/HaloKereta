@@ -590,7 +590,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Re-enter new PIN
+  m_text: Re-enter new Password
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -750,7 +750,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 111244660}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 730844345}
+        m_TargetAssemblyTypeName: RegistrationAdmin, Assembly-CSharp
+        m_MethodName: ContinueRegistration
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &111244660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1192,7 +1204,7 @@ GameObject:
   - component: {fileID: 346951586}
   - component: {fileID: 346951585}
   m_Layer: 5
-  m_Name: AgeField
+  m_Name: ConfirmField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2065,7 +2077,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter new PIN
+  m_text: Enter new Password
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2742,16 +2754,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 730844342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edeff34ed39e8f34abb8828582347f61, type: 3}
+  m_Script: {fileID: 11500000, guid: a5f8e4bd7d66c1f4a8e2aa8a1b1b9d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberCanvas: {fileID: 1406272756}
-  pinCanvas: {fileID: 0}
-  phoneNumberField: {fileID: 1543545888}
-  pinNumberField: {fileID: 0}
   dm: {fileID: 730844344}
-  warningPhoneText: {fileID: 0}
-  warningPinText: {fileID: 0}
+  profileCanvas: {fileID: 1406272756}
+  pinCanvas: {fileID: 1028701435}
+  phoneNumberField: {fileID: 1543545888}
+  nameField: {fileID: 1617873044}
+  ageField: {fileID: 424695982}
+  emailField: {fileID: 1390731448}
+  createPinField: {fileID: 942033966}
+  confirmPinField: {fileID: 346951585}
+  genderDropdown: {fileID: 38958626}
 --- !u!1 &802165563
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,7 +3028,7 @@ GameObject:
   - component: {fileID: 942033967}
   - component: {fileID: 942033966}
   m_Layer: 5
-  m_Name: CreatePINInputField
+  m_Name: CreatePassField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4589,7 +4604,7 @@ GameObject:
   - component: {fileID: 1390731449}
   - component: {fileID: 1390731448}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: EmailField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5444,9 +5459,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Registration, Assembly-CSharp
-        m_MethodName: ContinueRegistration
+      - m_Target: {fileID: 730844345}
+        m_TargetAssemblyTypeName: RegistrationAdmin, Assembly-CSharp
+        m_MethodName: CompleteRegistration
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6480,7 +6495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6-digit PIN
+  m_text: Password
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
