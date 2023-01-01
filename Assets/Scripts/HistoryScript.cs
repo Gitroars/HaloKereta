@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 
 
-public class TicketScript : MonoBehaviour
+public class HistoryScript : MonoBehaviour
 {
     public DatabaseManager dm;
 
@@ -21,13 +21,12 @@ public class TicketScript : MonoBehaviour
     private int ongoingTicketAmount = 0;
     private int currentPageIndex = 0;
     private int currentTicketId = 0;
-    private int currentTicketStatusId = 0;
     public GameObject ticketTemplate;
 
 
 
 
-    public TMP_Text stationsText, dateText,idText, priceText, walletText, tapText;
+    public TMP_Text stationsText, dateText,idText, priceText, walletText;
     public GameObject prevOngoingButton, nextOngoingButton;
 
 
@@ -48,18 +47,13 @@ public class TicketScript : MonoBehaviour
         
     }
 
-    public void OnTap()
-    {
-        dm.ChangeTicketStatus(currentTicketId,currentTicketStatusId +1);
-        RetrieveOngoingTicket();
-        LoadOngoingTickets();
-    }
+    
 
     void RetrieveOngoingTicket()
     {
         dm.CheckTicketExpiry();
         print("Retrieving ongoing tickets from userId " + _userId);
-        _ongoingTicketList = dm.GetUserOngoingTickets(_userId);
+        _ongoingTicketList = dm.GetUserHistoryTickets(_userId);
         ongoingTicketAmount= _ongoingTicketList.Count;
         print("Found " + ongoingTicketAmount + " ongoing tickets");
     }
@@ -75,23 +69,13 @@ public class TicketScript : MonoBehaviour
         if (ongoingTicketAmount > 0)
         {
             currentTicketId = _ongoingTicketList[currentPageIndex].TicketId;
-            int currentTicketRouteId = _ongoingTicketList[currentPageIndex].RouteId; 
-            currentTicketStatusId = _ongoingTicketList[currentPageIndex].StatusId;
-            print("ticket status" + currentTicketStatusId);
+            int currentTicketRouteId = _ongoingTicketList[currentPageIndex].RouteId;
             Tuple<string, string> stationsTuple = dm.GetStationsFromRouteId(currentTicketRouteId);
             stationsText.text = stationsTuple.Item1 + " > " + stationsTuple.Item2;
             idText.text = "Ticket Number "+ currentTicketId.ToString();
             priceText.text = "Rp. " + dm.GetRoutePriceFromId(currentTicketRouteId).ToString();
             walletText.text = dm.GetPayTypeName(_ongoingTicketList[currentPageIndex].PaymentId);
             dateText.text = _ongoingTicketList[currentPageIndex].Date;
-            if (currentTicketStatusId == 1)
-            {
-                tapText.text = "TAP IN";
-            }
-            else if (currentTicketStatusId == 2)
-            {
-                tapText.text = "TAP OUT";
-            }
             ticketTemplate.SetActive(true);
         }
         else

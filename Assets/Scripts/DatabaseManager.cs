@@ -708,7 +708,7 @@ public class DatabaseManager : MonoBehaviour
     public List<Ticket> GetUserOngoingTickets(int userId)
     {
         List<Ticket> ongoingTicketList = new List<Ticket>();
-        string currentDate = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy");
+        
         try
         {
             using (connection)
@@ -759,8 +759,81 @@ public class DatabaseManager : MonoBehaviour
 
         return new List<Ticket>();
     }
-    
+    public List<Ticket> GetUserHistoryTickets(int userId)
+    {
+        List<Ticket> ongoingTicketList = new List<Ticket>();
+        try
+        {
+            using (connection)
+            {
+                
+                connection.Open();
+                print("MySQL - Opened Connection To GET HISTORY TICKETS");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText =
+                    $" SELECT * from Tickets WHERE user_id = {userId} AND (status_id = 3 OR status_id=4) ";
+                                  
+                var myReader = cmd.ExecuteReader();
+                
+                while (myReader.HasRows)
+                {
+                    while (myReader.Read())
+                    {
+                        print("Found a ticket");
+                        int  ticketId = Convert.ToInt32(myReader.GetString(0));
+                        
+                        int routeId = Convert.ToInt32(myReader.GetString(4));
+                        int statusId = Convert.ToInt32(myReader.GetString(1));
+                        int paymentId = Convert.ToInt32(myReader.GetString(3));
+                        string dateDb = myReader.GetString(5);
+                        string timeDb = myReader.GetString(6);
+                        print("i:"+ticketId+"r:"+routeId+"s:"+statusId+"p:"+paymentId);
+                        Ticket ongoingTicket = new Ticket(ticketId,userId,routeId,paymentId,statusId,dateDb,timeDb);
+                        ongoingTicketList.Add(ongoingTicket);
+                        print("found ticket with status id "+statusId);
+                    }
+                    myReader.NextResult();
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+                connection.Close();
+                return ongoingTicketList;
 
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+
+        return new List<Ticket>();
+    }
+
+    public void CheckTicketExpiry()
+    {
+        string currentDate = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy");
+        try
+        {
+            using (connection)
+            {
+                connection.Open();
+                print("MySQL - Checking and Updating Ticket Expiry...");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = $"UPDATE Tickets SET status_id = 4 WHERE NOT transaction_date = '{currentDate}'";
+                cmd.ExecuteNonQuery();
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+    }
     public void ChangeTicketStatus(int ticketId, int newStatus)
     {
 
