@@ -409,7 +409,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 730844345}
         m_TargetAssemblyTypeName: SceneTransit, Assembly-CSharp
         m_MethodName: OpenOngoingPage
         m_Mode: 1
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 730844345}
         m_TargetAssemblyTypeName: SceneTransit, Assembly-CSharp
         m_MethodName: OpenStationPage
         m_Mode: 1
@@ -947,7 +947,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 730844345}
         m_TargetAssemblyTypeName: SceneTransit, Assembly-CSharp
         m_MethodName: OpenHistoryPage
         m_Mode: 1
@@ -1007,6 +1007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730844343}
   - component: {fileID: 730844344}
+  - component: {fileID: 730844345}
   m_Layer: 0
   m_Name: Admin
   m_TagString: Untagged
@@ -1039,6 +1040,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49e6546c4e8dda84fbb131d8d773e408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &730844345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730844342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e185e0cc56cd848409a32bf1e89007cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &858995398
