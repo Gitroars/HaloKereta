@@ -54,3 +54,6 @@ sysinfo.txt
 ProjectSettings/RiderScriptEditorPersistedState.asset
 ProjectSettings/RiderScriptEditorPersistedState.asset
 ProjectSettings/RiderScriptEditorPersistedState.asset
+*.log
+*.log
+*.log
