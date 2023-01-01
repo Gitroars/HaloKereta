@@ -25,7 +25,7 @@ public class TicketScript : MonoBehaviour
 
 
 
-    public Text stationsText, idText, priceText, walletText, tapText;
+    public TMP_Text stationsText, idText, priceText, walletText, tapText;
     public GameObject prevOngoingButton, nextOngoingButton;
 
 

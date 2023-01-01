@@ -11,22 +11,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/(3) RegistrationPage.unity
     guid: 80335c290b7825048b47f2e9c4e2eacb
-  - enabled: 1
-    path: Assets/Scenes/(4) MenuPage.unity
-    guid: c97650c360713ca428c06a0ffb981a74
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/(5) StationPage.unity
     guid: b5bf7941f01160a4baf22fc26159cf20
   - enabled: 1
     path: Assets/Scenes/(6) PaymentPage.unity
     guid: 48e34704accc8b34ab6bf1ec510da113
-  - enabled: 1
-    path: Assets/Scenes/(7) TicketPage.unity
-    guid: e20316a73df6d5943b8f693ede0fe3e4
-  - enabled: 1
-    path: Assets/Scenes/(8) OngoingPage.unity
-    guid: c145cf01d8b324345b340c3dec566fe5
-  - enabled: 1
-    path: Assets/Scenes/(9) History.unity
-    guid: 57886a5f54d60904fab34103569395a0
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
