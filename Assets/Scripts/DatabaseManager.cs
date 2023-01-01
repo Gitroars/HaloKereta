@@ -37,6 +37,7 @@ public class DatabaseManager : MonoBehaviour
     public class Route
     {
         public int RouteId,OriginId,DestId,Price;
+        
 
         public Route(int routeId, int originId, int destId, int price)
         {
@@ -44,25 +45,27 @@ public class DatabaseManager : MonoBehaviour
             OriginId = originId;
             DestId = destId;
             Price = price;
+            
         }
     }
 
     public class Ticket
     {
-        public string TicketId;
-        public int UserId, RouteId, PaymentId, StatusId;
+        
+        public int TicketId,UserId, RouteId, PaymentId, StatusId;
         public string Date, Time;
 
-        public Ticket(string ticketId, int userId, int routeId, int paymentId, int statusId, string date, string time)
+        public Ticket(int ticketId, int userId, int routeId, int paymentId, int statusId,string date,string time)
         {
             TicketId = ticketId;
             UserId = userId;
             RouteId = routeId;
             PaymentId = paymentId;
             StatusId = statusId;
-
             Date = date;
             Time = time;
+
+            
         }
     }
     #endregion
@@ -195,6 +198,10 @@ public class DatabaseManager : MonoBehaviour
                     connection.Close();
                     return userID;
                 }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
 
                 print("MySQL - Opened Connection To GET USER ID");
             }
@@ -238,6 +245,10 @@ public class DatabaseManager : MonoBehaviour
 
 
                     }
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
                 }
 
                 print("MySQL - Opened Connection To Check Email");
@@ -283,6 +294,10 @@ public class DatabaseManager : MonoBehaviour
 
                     }
                 }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
 
                 print("MySQL - Opened Connection To Check Mobile Number");
             }
@@ -325,6 +340,10 @@ public class DatabaseManager : MonoBehaviour
                         return true;
                     }
 
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
                 }
 
             }
@@ -411,6 +430,10 @@ public class DatabaseManager : MonoBehaviour
                     originId= Convert.ToInt32((myReader.GetString(0)));
                     destId = Convert.ToInt32((myReader.GetString(1)));
                 }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
 
                 cmd.CommandText = $"SELECT station_name from Stations WHERE station_id = {originId}";
                  myReader = cmd.ExecuteReader();
@@ -418,11 +441,19 @@ public class DatabaseManager : MonoBehaviour
                  {
                      originName = myReader.GetString(0);
                  }
+                 if (!myReader.IsClosed)
+                 {
+                     myReader.Close();
+                 }
                  cmd.CommandText = $"SELECT station_name from Stations WHERE station_id = {destId}";
                  myReader = cmd.ExecuteReader();
                  while (myReader.Read())
                  {
                      destName = myReader.GetString(0);
+                 }
+                 if (!myReader.IsClosed)
+                 {
+                     myReader.Close();
                  }
                  
                  connection.Close();
@@ -442,6 +473,7 @@ public class DatabaseManager : MonoBehaviour
     }
     public int GetRoutePriceFromId(int routeId)
     {
+        int routePrice = 0;
 
         try
         {
@@ -458,10 +490,16 @@ public class DatabaseManager : MonoBehaviour
 
                 while (myReader.Read())
                 {
-                    int routePrice = Convert.ToInt32((myReader.GetString(0)));
+                    routePrice = Convert.ToInt32((myReader.GetString(0)));
                     connection.Close();
                     return routePrice;
                 }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+                connection.Close();
+                return routePrice;
 
             }
         }
@@ -476,6 +514,7 @@ public class DatabaseManager : MonoBehaviour
     }
     public int GetRoutePrice(int originId, int destinationId)
     {
+        int routePrice = 0;
 
         try
         {
@@ -492,9 +531,50 @@ public class DatabaseManager : MonoBehaviour
 
                 while (myReader.Read())
                 {
-                    int routePrice = Convert.ToInt32((myReader.GetString(0)));
+                    routePrice = Convert.ToInt32((myReader.GetString(0)));
+                    
+                    
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+                connection.Close();
+                return routePrice;
+
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        connection.Close();
+
+        return 0;
+    }
+    
+    public int GetRouteIdFromStations(int originId, int destinationId)
+    {
+
+        try
+        {
+            using (connection)
+            {
+
+                connection.Open();
+                print("MySQL - Opened Connection To GET ROUTE ID");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText =
+                    $" SELECT route_id from Routes WHERE station_origin_id='{originId}' AND station_destination_id = '{destinationId}'";
+                var myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    int dbId = Convert.ToInt32((myReader.GetString(0)));
                     connection.Close();
-                    return routePrice;
+                    return dbId;
                 }
 
             }
@@ -590,28 +670,24 @@ public class DatabaseManager : MonoBehaviour
     }
     #endregion
 
-    public void AddTickets(string ticketId, int ticketStatus, int userId, int paymentId, string date, string time)
+    public void AddTickets(int ticketStatus, int userId, int paymentId,int routeId,string iDate,string iTime)
     {
-
-        using var cmd = new MySqlCommand();
-        cmd.Connection = connection;
-
-
-
-
-
-
+        
         try
         {
             using (connection)
             {
                 connection.Open();
-                print("MySQL - Ticket Added Successfully");
-                cmd.CommandText =
-                    $"INSERT IGNORE INTO Tickets (ticket_id,status_id,user_id,payment_id,transaction_date,transaction_time) VALUES('{ticketId}'," +
-                    $"{ticketStatus},{userId},{paymentId},'{date}','{time}')";
-
-
+                using var cmd = new MySqlCommand();
+                cmd.Connection = connection;
+                print("-----------------------------");
+                print("Adding new ticket with the following credentials:");
+                print("Ticket status: "+ ticketStatus);
+                print("Ticket user Id: " + userId);
+                print("Ticket paymentID: "+ paymentId);
+                print("Ticket routeId: "+ routeId);
+                print("-----------------------------");
+                cmd.CommandText = $"INSERT  INTO Tickets (status_id,user_id,payment_id,route_id,transaction_date,transaction_time) VALUES('{ticketStatus}','{userId}','{paymentId}','{routeId}','{iDate}','{iTime}')";
                 cmd.ExecuteNonQuery();
             }
         }
@@ -619,11 +695,9 @@ public class DatabaseManager : MonoBehaviour
         {
             print(exception.Message);
         }
-        
-
-
-
     }
+    
+    
 
 
 
@@ -645,7 +719,7 @@ public class DatabaseManager : MonoBehaviour
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
                 cmd.CommandText =
-                    $" SELECT * from Tickets WHERE user_id = {userId} AND NOT (status_id = 4 OR status_id = 5)";
+                    $" SELECT * from Tickets WHERE user_id = {userId} AND (status_id = 1 OR status_id=2) ";
                                   
                 var myReader = cmd.ExecuteReader();
                 
@@ -653,13 +727,16 @@ public class DatabaseManager : MonoBehaviour
                 {
                     while (myReader.Read())
                     {
-                        string ticketId = myReader.GetString(0);
-                        int routeId = Convert.ToInt32(myReader.GetString(1));
-                        int statusId = Convert.ToInt32(myReader.GetString(2));
+                        print("Found a ticket");
+                        int  ticketId = Convert.ToInt32(myReader.GetString(0));
+                        
+                        int routeId = Convert.ToInt32(myReader.GetString(4));
+                        int statusId = myReader.GetInt32(1);
                         int paymentId = Convert.ToInt32(myReader.GetString(3));
-                        string date = myReader.GetString(4);
-                        string time = myReader.GetString(5);
-                        Ticket ongoingTicket = new Ticket(ticketId,userId,routeId,paymentId,statusId,date,time);
+                        string dateDb = myReader.GetString(5);
+                        string timeDb = myReader.GetString(6);
+                        print("i:"+ticketId+"r:"+routeId+"s:"+statusId+"p:"+paymentId);
+                        Ticket ongoingTicket = new Ticket(ticketId,userId,routeId,paymentId,statusId,dateDb,timeDb);
                         ongoingTicketList.Add(ongoingTicket);
                     }
                     myReader.NextResult();
@@ -679,60 +756,11 @@ public class DatabaseManager : MonoBehaviour
         }
         connection.Close();
 
-        return null;
+        return new List<Ticket>();
     }
-    public List<Ticket> GetUserHistoryTickets(int userId)
-    {
-        List<Ticket> historyTicketList = new List<Ticket>();
-        string currentDate = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy");
-        try
-        {
-            using (connection)
-            {
-                
-                connection.Open();
-                print("MySQL - Opened Connection To GET ROUTE PRICE");
-                using var cmd = connection.CreateCommand();
-                cmd.Connection = connection;
-                cmd.CommandText =
-                    $" SELECT * from Tickets WHERE user_id = {userId} AND  (status_id = 4 OR status_id = 5)";
-                                  
-                var myReader = cmd.ExecuteReader();
-                
-                while (myReader.HasRows)
-                {
-                    while (myReader.Read())
-                    {
-                        string ticketId = myReader.GetString(0);
-                        int routeId = Convert.ToInt32(myReader.GetString(1));
-                        int statusId = Convert.ToInt32(myReader.GetString(2));
-                        int paymentId = Convert.ToInt32(myReader.GetString(3));
-                        string date = myReader.GetString(4);
-                        string time = myReader.GetString(5);
-                        Ticket ongoingTicket = new Ticket(ticketId,userId,routeId,paymentId,statusId,date,time);
-                        historyTicketList.Add(ongoingTicket);
-                    }
-                    myReader.NextResult();
-                }
-                if (!myReader.IsClosed)
-                {
-                    myReader.Close();
-                }
-                connection.Close();
-                return historyTicketList;
+    
 
-            }
-        }
-        catch (MySqlException exception)
-        {
-            print(exception.Message);
-        }
-        connection.Close();
-
-        return null;
-    }
-
-    public void ChangeTicketStatus(string ticketId, int newStatus)
+    public void ChangeTicketStatus(int ticketId, int newStatus)
     {
 
         try
@@ -743,7 +771,7 @@ public class DatabaseManager : MonoBehaviour
                 print("MySQL - Ticket Status Modified Successfully");
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
-                cmd.CommandText = $"UPDATE Tickets SET ticket_status_id = {newStatus} WHERE ticket_id = '{ticketId}'";
+                cmd.CommandText = $"UPDATE Tickets SET status_id = '{newStatus}' WHERE ticket_id = '{ticketId}'";
                 cmd.ExecuteNonQuery();
             }
         }

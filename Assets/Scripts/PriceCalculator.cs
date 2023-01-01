@@ -20,6 +20,7 @@ public class PriceCalculator : MonoBehaviour
     private int ticketPrice;
 
     private int originId = 0, destId = 0;
+    private int roundTrip = 0;
 
     public GameObject warnText;
     // Start is called before the first frame update
@@ -112,6 +113,11 @@ public class PriceCalculator : MonoBehaviour
     {
         
         ticketPrice = dm.GetRoutePrice(originId, destId);
+        if (roundTrip!=0)
+        {
+            ticketPrice *= 2;
+            PlayerPrefs.SetInt("roundTrip",1);
+        }
         priceText.text = "BUY TICKET - RP. "+ ticketPrice.ToString();
 
     }

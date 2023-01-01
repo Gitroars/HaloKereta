@@ -6099,9 +6099,11 @@ MonoBehaviour:
   pinCanvas: {fileID: 2107133295}
   phoneNumberField: {fileID: 0}
   nameField: {fileID: 0}
+  ageField: {fileID: 0}
   emailField: {fileID: 0}
   createPinField: {fileID: 1955531227}
   confirmPinField: {fileID: 739047487}
+  genderDropdown: {fileID: 0}
 --- !u!1 &1910327719
 GameObject:
   m_ObjectHideFlags: 0

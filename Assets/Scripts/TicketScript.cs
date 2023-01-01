@@ -17,13 +17,18 @@ public class TicketScript : MonoBehaviour
 
     private List<DatabaseManager.Ticket> _ongoingTicketList = new List<DatabaseManager.Ticket>();
     private List<DatabaseManager.Ticket> _historyTicketList = new List<DatabaseManager.Ticket>();
-    
-    
-     
+    private int ongoingTicketAmount = 0;
+    private int currentPageIndex = 0;
+    private int currentTicketId = 0;
+    private int currentStatusId = 0;
 
-    public GameObject ticketTemplate;
 
-    private GameObject t;
+
+
+    public Text stationsText, idText, priceText, walletText, tapText;
+    public GameObject prevOngoingButton, nextOngoingButton;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +36,8 @@ public class TicketScript : MonoBehaviour
         
         
         RetrieveOngoingTicket();
-        RetrieveHistoryTickets();
-        DisplayOngoingTickets();
+        LoadOngoingTickets();
+        DecideButtonVisible();
     } 
 
     // Update is called once per frame
@@ -41,61 +46,82 @@ public class TicketScript : MonoBehaviour
         
     }
 
+    public void OnTap()
+    {
+        dm.ChangeTicketStatus(currentTicketId,currentStatusId++);
+        LoadOngoingTickets();
+    }
+
     void RetrieveOngoingTicket()
     {
+        print("Retrieving ongoing tickets from userId " + _userId);
         _ongoingTicketList = dm.GetUserOngoingTickets(_userId);
-        
+        ongoingTicketAmount= _ongoingTicketList.Count;
+        print("Found " + ongoingTicketAmount + " ongoing tickets");
     }
 
-    void RetrieveHistoryTickets()
-    {
-        _historyTicketList = dm.GetUserHistoryTickets(_userId);
-    }
+    
 
 
     
     
 
-    void DisplayOngoingTickets()
+    void LoadOngoingTickets()
     {
-        
-        int N = _ongoingTicketList.Count;
-        for (int i = 0; i < N; i++)
+        currentTicketId = _ongoingTicketList[currentPageIndex].TicketId;
+        int currentTicketRouteId = _ongoingTicketList[currentPageIndex].RouteId;
+        int currentTicketStatusId = _ongoingTicketList[currentPageIndex].StatusId;
+        Tuple<string, string> stationsTuple = dm.GetStationsFromRouteId(currentTicketRouteId);
+        stationsText.text = stationsTuple.Item1 + " > " + stationsTuple.Item2;
+        idText.text = "Ticket Number "+ currentTicketId.ToString();
+        priceText.text = "Rp. " + dm.GetRoutePriceFromId(currentTicketRouteId).ToString();
+        walletText.text = dm.GetPayTypeName(_ongoingTicketList[currentPageIndex].PaymentId);
+        switch (currentTicketStatusId)
         {
-            t = Instantiate(ticketTemplate, ticketTemplate.transform);
-            int routeId = _ongoingTicketList[i].RouteId;
-            Tuple<string, string> stations = dm.GetStationsFromRouteId(routeId);
-                
-            string ticketId = _ongoingTicketList[i].TicketId;
-            string date = _ongoingTicketList[i].Date;
-            string time = _ongoingTicketList[i].Time;
-            int routePrice = dm.GetRoutePriceFromId(routeId);
-            int payId = _ongoingTicketList[i].PaymentId;
-            int statusId = _ongoingTicketList[i].StatusId;
-            t.transform.GetChild(0).GetComponent<Text>().text = stations.Item1 + " > " + stations.Item2;
-            t.transform.GetChild(1).GetComponent<Text>().text = date + " - " + time;
-            t.transform.GetChild(2).GetComponent<Text>().text = ticketId;
-            t.transform.GetChild(3).GetComponent<Text>().text = routePrice.ToString();
-            t.transform.GetChild(4).GetComponent<Text>().text = dm.GetPayTypeName(payId);
-            // Button tapButton = t.transform.GetChild(5).GetComponent<Button>();
-            // void onClick()
-            // {
-            //     dm.ChangeTicketStatus(ticketId,statusId+1);
-            // }
-            // tapButton.onClick.AddListener(onClick);
-            
-            string tapValue = "";
-            switch (statusId)
-            {
-                case 1: tapValue = "TAP IN"; break;
-                    case 2: tapValue = "TAP OUT"; break;
-                        default: break;
-                            
-            }
-            t.transform.GetChild(5).GetChild(0).GetComponent<Text>().text = tapValue;
+            case 1: tapText.text = "TAP IN"; break;
+            case 2: tapText.text = "TAP OUT"; break;
+            default: break;
         }
-            
+    }
+
+    void DecideButtonVisible()
+    {
+        if (currentPageIndex == 0)
+        {
+            prevOngoingButton.SetActive(false);
+        }
+        else
+        { prevOngoingButton.SetActive(true);
+        }
+
+        if (currentPageIndex == ongoingTicketAmount-1)
+        {
+            nextOngoingButton.SetActive(false);
+        }
+        else
+        {
+            nextOngoingButton.SetActive(true);
+        }
+    }
+
+    public void PreviousOngoingTicket()
+    {
+        if (currentPageIndex != 0)
+        {
+            currentPageIndex--;
+            DecideButtonVisible();
+            LoadOngoingTickets();
+        }
         
     }
-    
+    public void NextOngoingTicket()
+    {
+        if (currentPageIndex != _ongoingTicketList.Count)
+        {
+            currentPageIndex++;
+            DecideButtonVisible();
+            LoadOngoingTickets();
+        }
+        
+    }
 }

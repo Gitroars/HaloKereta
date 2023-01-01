@@ -17,6 +17,11 @@ public class TicketPayType : MonoBehaviour
         dm = GetComponent<DatabaseManager>();
         paymentTypeDict = dm.GetPayTypeDict();
         AddPaymentTypeList();
+        
+        typeDropdown.onValueChanged.AddListener(delegate
+        {
+            ToPayment();
+        });
     }
 
     // Update is called once per frame

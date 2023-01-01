@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,33 +9,35 @@ using TMPro;
 public class TicketPayment : MonoBehaviour
 {
     public DatabaseManager dm;
-    public TMP_Text idText,originText,destinationText,paymentText,priceText;
     private string ticketID, origin, destination, payment;
     private int price;
-    private int userID;
+    private int userID,originId,destId,routeId;
+    private bool roundTrip = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        userID = PlayerPrefs.GetInt("userID");
+        userID = PlayerPrefs.GetInt("userId");
 
         ticketID = GenerateTicketID();
-        idText.text = ticketID;
         
-        
-        
-        
+
+
+
+        originId = PlayerPrefs.GetInt("stationOriginId");
+        destId = PlayerPrefs.GetInt("stationDestinationId");
+        routeId = dm.GetRouteIdFromStations(originId, destId);
         origin  = PlayerPrefs.GetString("stationOriginName");
-        originText.text = origin;
+       
         
         destination = PlayerPrefs.GetString("stationDestName");
-        destinationText.text = destination;
+        
         
         payment = PlayerPrefs.GetString("paymentTypeName");
-        paymentText.text = payment;
+        
         
         price = PlayerPrefs.GetInt("ticketPrice");
-        priceText.text = "RP. "+ price.ToString();
+        
     }
 
     // Update is called once per frame
@@ -44,10 +47,15 @@ public class TicketPayment : MonoBehaviour
     }
     public void ConfirmTicketPurchase()
     {
-        int paymentId = PlayerPrefs.GetInt("paymentId");
-        string date = GetCurrentDate();
-        string time = GetCurrentTime();
-        dm.AddTickets(ticketID, 1, userID, paymentId, date, time);
+       
+        string currentDate = GetCurrentDate();
+        string currentTime = GetCurrentTime();
+        int paymentId = PlayerPrefs.GetInt("paymentTypeId");
+        
+        dm.AddTickets( 1, userID, paymentId,routeId,currentDate,currentTime);
+        print("Added New Ticket with the following credentials");
+        print("Timestamp: "+ currentDate + currentTime);
+
     }
     // Reference: https://www.youtube.com/watch?v=WaWI60hYOzo
     string GenerateTicketID() 
@@ -59,21 +67,25 @@ public class TicketPayment : MonoBehaviour
         {
             randomChars[i] = allChars[UnityEngine.Random.Range(0, allChars.Length)];
         }
-
         return new string(randomChars);
     }
 
+    
+
     string GetCurrentDate()
     {
-        string date = System.DateTime.UtcNow.ToLocalTime().ToString("dd-MM-yyyy");
+        string date= System.DateTime.UtcNow.ToLocalTime().ToString("yyyy-M-d");
         return date;
     }
 
     string GetCurrentTime()
     {
-        string time = System.DateTime.UtcNow.ToLocalTime().ToString("HH:mm");
+        string time= System.DateTime.UtcNow.ToLocalTime().ToString("HH:mm:ss");
+        time = time.Replace(".", ":");
         return time;
     }
+
+    
 
     
 }
