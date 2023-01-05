@@ -2454,7 +2454,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 730844347}
         m_TargetAssemblyTypeName: TicketScript, Assembly-CSharp
         m_MethodName: OnTap
         m_Mode: 1
