@@ -76,6 +76,11 @@ public class DatabaseManager : MonoBehaviour
         public string FullName,Email,Pin,MobileNumber;
         public char Sex;
 
+        public AppUser()
+        {
+            
+        }
+
         public AppUser(int userId, int age, string fullName, string email, string pin, string mobileNumber, char sex)
         {
             UserId = userId;
@@ -377,6 +382,115 @@ public class DatabaseManager : MonoBehaviour
         connection.Close();
 
         return false;
+    }
+
+    public List<AppUser> GetUserList()
+    {
+        List<AppUser> appUserList = new List<AppUser>();
+        
+        try
+        {
+            using (connection)
+            {
+                
+                connection.Open();
+                print("MySQL - Opened Connection To GET USER LIST");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText =
+                    $" SELECT * from Users";
+                                  
+                var myReader = cmd.ExecuteReader();
+                
+                while (myReader.HasRows)
+                {
+                    print("Found user list");
+                    while (myReader.Read())
+                    {
+                        int DbUserId = Convert.ToInt32(myReader.GetString(0));
+                        string DbFullName = myReader.GetString(1);
+                        char DbSex = Convert.ToChar(myReader.GetString(2));
+                        string DbEmail = myReader.GetString(3);
+                        string DbPin = myReader.GetString(4);
+                        string DbMobileNumber = myReader.GetString(5);
+                        int DbAge = Convert.ToInt32(myReader.GetString(6));
+                        AppUser newUser = new AppUser(DbUserId, DbAge, DbFullName, DbEmail, DbPin, DbMobileNumber,
+                            DbSex);
+                        appUserList.Add(newUser);
+                        
+                    }
+                    myReader.NextResult();
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+                connection.Close();
+                return appUserList;
+
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+
+        return new List<AppUser>();
+    }
+
+    public AppUser GetUserData(int appUserId)
+    {
+        AppUser appUser = new AppUser();
+        
+        try
+        {
+            using (connection)
+            {
+                
+                connection.Open();
+                print("MySQL - Opened Connection To GET USER LIST");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText =
+                    $" SELECT * from Users WHERE user_id = {appUserId}";
+                                  
+                var myReader = cmd.ExecuteReader();
+                
+                while (myReader.HasRows)
+                {
+                    print("Found user list");
+                    while (myReader.Read())
+                    {
+                        appUser.UserId = Convert.ToInt32(myReader.GetString(0));
+                        appUser.FullName = myReader.GetString(1);
+                        appUser.Sex = Convert.ToChar(myReader.GetString(2));
+                        appUser.Email = myReader.GetString(3);
+                        appUser.Pin = myReader.GetString(4);
+                        appUser.MobileNumber = myReader.GetString(5);
+                        appUser.Age = Convert.ToInt32(myReader.GetString(6));
+                        
+                       
+                        
+                    }
+                    myReader.NextResult();
+                }
+                if (!myReader.IsClosed)
+                {
+                    myReader.Close();
+                }
+                connection.Close();
+                
+
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+
+        return  appUser;
     }
     #endregion
     #region Admin Functions
