@@ -69,6 +69,24 @@ public class DatabaseManager : MonoBehaviour
         }
         
     }
+
+    public class AppUser
+    {
+        public int UserId,Age;
+        public string FullName,Email,Pin,MobileNumber;
+        public char Sex;
+
+        public AppUser(int userId, int age, string fullName, string email, string pin, string mobileNumber, char sex)
+        {
+            UserId = userId;
+            Age = age;
+            FullName = fullName;
+            Email = email;
+            Pin = pin;
+            MobileNumber = mobileNumber;
+            Sex = sex;
+        }
+    }
     #endregion
 
     #region UNITY METHODS
