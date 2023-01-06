@@ -410,8 +410,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 730844345}
-        m_TargetAssemblyTypeName: SceneTransit, Assembly-CSharp
-        m_MethodName: OpenStationPage
+        m_TargetAssemblyTypeName: SceneTransitAdmin, Assembly-CSharp
+        m_MethodName: OpenMenuPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -745,7 +745,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 730844342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e185e0cc56cd848409a32bf1e89007cd, type: 3}
+  m_Script: {fileID: 11500000, guid: d0203ba840046474b8caffb7b713930b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &858995398

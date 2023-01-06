@@ -1,23 +1,23 @@
 Using pre-set license
 Built from '2021.3/staging' branch; Version is '2021.3.0f1 (6eacc8284459) revision 7253192'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 11  (10.0.22621) 64bit CoreSingleLanguage' Language: 'en' Physical Memory: 16076 MB
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'en' Physical Memory: 16268 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
-C:\Program Files\Unity 2021.3.0f1\Editor\Unity.exe
+C:\Program Files\Unity\Hub\Editor\2021.3.0f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-C:/Users/Owen/Documents/GitHub/Semester 3/HaloKereta
+D:/Unity Projects/HaloKereta
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-51132
-Successfully changed project path to: C:/Users/Owen/Documents/GitHub/Semester 3/HaloKereta
-C:/Users/Owen/Documents/GitHub/Semester 3/HaloKereta
+52603
+Successfully changed project path to: D:/Unity Projects/HaloKereta
+D:/Unity Projects/HaloKereta
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -47,217 +47,61 @@ C:/Users/Owen/Documents/GitHub/Semester 3/HaloKereta
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 79.91 ms, found 5 plugins.
+Refreshing native plugins compatible for Editor in 293.46 ms, found 5 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.0f1 (6eacc8284459)
-[Subsystems] Discovering subsystems at path C:/Program Files/Unity 2021.3.0f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/Owen/Documents/GitHub/Semester 3/HaloKereta/Assets
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.0f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path D:/Unity Projects/HaloKereta/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce RTX 3060 Laptop GPU (ID=0x2520)
-    Vendor:   NVIDIA
-    VRAM:     6023 MB
-    Driver:   30.0.15.1278
+    Renderer: Intel(R) HD Graphics 630 (ID=0x591b)
+    Vendor:   Intel
+    VRAM:     8134 MB
+    Driver:   31.0.101.2111
 Initialize mono
-Mono path[0] = 'C:/Program Files/Unity 2021.3.0f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Program Files/Unity 2021.3.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
-Mono config path = 'C:/Program Files/Unity 2021.3.0f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56660
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.0f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.0f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56452
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity 2021.3.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002705 seconds.
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.0f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.0f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.026986 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 66.75 ms, found 5 plugins.
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 1430.94 ms, found 5 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.613 seconds
+- Completed reload, in 11.421 seconds
 Domain Reload Profiling:
-	ReloadAssembly (614ms)
-		BeginReloadAssembly (99ms)
+	ReloadAssembly (11421ms)
+		BeginReloadAssembly (690ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (418ms)
-			LoadAssemblies (97ms)
+			CreateAndSetChildDomain (2ms)
+		EndReloadAssembly (9922ms)
+			LoadAssemblies (620ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (109ms)
+			SetupTypeCache (445ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (26ms)
-			SetupLoadedEditorAssemblies (235ms)
+			RebuildScriptCaches (316ms)
+			SetupLoadedEditorAssemblies (8428ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (8ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (67ms)
-				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (125ms)
-				ProcessInitializeOnLoadMethodAttributes (34ms)
+				InitializePlatformSupportModulesInManaged (680ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1431ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (6116ms)
+				ProcessInitializeOnLoadMethodAttributes (198ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.012963 seconds.
+Registered in 0.190776 seconds.
 Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\Owen\Documents\GitHub\Semester 3\HaloKereta\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory is not a mono symbol file
-Symbol file LoadedFromMemory doesn't match image C:\Users\Owen\Documents\GitHub\Semester 3\HaloKereta\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 56.67 ms, found 5 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  0.787 seconds
-Domain Reload Profiling:
-	ReloadAssembly (788ms)
-		BeginReloadAssembly (84ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (4ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (13ms)
-		EndReloadAssembly (636ms)
-			LoadAssemblies (85ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (170ms)
-			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (38ms)
-			SetupLoadedEditorAssemblies (315ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (8ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (57ms)
-				BeforeProcessingInitializeOnLoad (62ms)
-				ProcessInitializeOnLoadAttributes (154ms)
-				ProcessInitializeOnLoadMethodAttributes (29ms)
-				AfterProcessingInitializeOnLoad (5ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (4ms)
-Platform modules already initialized, skipping
-========================================================================
-Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 0.51 ms, found 5 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3951 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 46 unused Assets / (55.7 KB). Loaded Objects now: 4399.
-Memory consumption went from 150.1 MB to 150.1 MB.
-Total: 2.789700 ms (FindLiveObjects: 0.206700 ms CreateObjectMapping: 0.118400 ms MarkObjects: 2.395800 ms  DeleteObjects: 0.067800 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 1143009.983733 seconds.
-  path: Assets/Scenes/(2) LoginPage.unity
-  artifactKey: Guid(bb54ade5d5182c24caee7b02f24c4f49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(2) LoginPage.unity using Guid(bb54ade5d5182c24caee7b02f24c4f49) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3db13879dbd760cf0507ed99e2ca1887') in 0.006614 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 3.933066 seconds.
-  path: Assets/Scenes/(3) RegistrationPage.unity
-  artifactKey: Guid(80335c290b7825048b47f2e9c4e2eacb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(3) RegistrationPage.unity using Guid(80335c290b7825048b47f2e9c4e2eacb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '64e6336ee5399c79a480e0dba16fe7d0') in 0.001624 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.680378 seconds.
-  path: Assets/Scenes/(3.0) RegistrationPageAdmin.unity
-  artifactKey: Guid(a108c71cea1176446a4b78e164cf7539) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(3.0) RegistrationPageAdmin.unity using Guid(a108c71cea1176446a4b78e164cf7539) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c1a0281fa9c603d99b949b0b561d7161') in 0.001517 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.640292 seconds.
-  path: Assets/Scenes/(4) MenuPage.unity
-  artifactKey: Guid(72871e3f275a0894086139865b3121fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(4) MenuPage.unity using Guid(72871e3f275a0894086139865b3121fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b7678890b275ee2e2f280fbd35de89a') in 0.001349 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.932138 seconds.
-  path: Assets/Scenes/(4.0) MenuPageAdmin.unity
-  artifactKey: Guid(acf45c874572f074396382af149e64b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(4.0) MenuPageAdmin.unity using Guid(acf45c874572f074396382af149e64b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15110ae4b588458a91e05c47884d1a61') in 0.001600 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 6.059205 seconds.
-  path: Assets/Scenes/(5) StationPage.unity
-  artifactKey: Guid(b5bf7941f01160a4baf22fc26159cf20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(5) StationPage.unity using Guid(b5bf7941f01160a4baf22fc26159cf20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c4eab7b2fcb7b97e5728b54ac12ba0ba') in 0.002071 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 5.302874 seconds.
-  path: Assets/Scenes/(6) PaymentPage.unity
-  artifactKey: Guid(48e34704accc8b34ab6bf1ec510da113) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(6) PaymentPage.unity using Guid(48e34704accc8b34ab6bf1ec510da113) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f14cebab08d547dc79f04f9bd4c6f1d5') in 0.001462 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.251752 seconds.
-  path: Assets/Scenes/(7) TicketPage.unity
-  artifactKey: Guid(a0931a1f9970bba4b9fa9fa54eb471d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(7) TicketPage.unity using Guid(a0931a1f9970bba4b9fa9fa54eb471d7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c22812a82d6af7d4b495dc894ab1793') in 0.001514 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 3.014797 seconds.
-  path: Assets/Scenes/(8) OngoingPage.unity
-  artifactKey: Guid(c6a00fbbb92cfdc45aad0231a29e2acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(8) OngoingPage.unity using Guid(c6a00fbbb92cfdc45aad0231a29e2acd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0531dec61aeb4315567be45b45c92e1a') in 0.001959 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 6.199952 seconds.
-  path: Assets/Scenes/(9) HistoryPage.unity
-  artifactKey: Guid(0ab904cf3552d154ebea5c0ce68a8c3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(9) HistoryPage.unity using Guid(0ab904cf3552d154ebea5c0ce68a8c3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4331fbccbb76a159182a4985086fb8c8') in 0.001640 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 152.850141 seconds.
-  path: Assets/Scenes/(5) StationPage.unity
-  artifactKey: Guid(b5bf7941f01160a4baf22fc26159cf20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(5) StationPage.unity using Guid(b5bf7941f01160a4baf22fc26159cf20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8522dbd90986ed9c448d731e1c283b07') in 0.001549 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 153.652830 seconds.
-  path: Assets/Scenes/(7) TicketPage 1.unity
-  artifactKey: Guid(09a06212eb46dec46ba0c2e3ec651e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(7) TicketPage 1.unity using Guid(09a06212eb46dec46ba0c2e3ec651e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f97a7bf35d7a82474a68b96a59f9d7b3') in 0.001804 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 14.947833 seconds.
-  path: Assets/Scenes/(10) User Page.unity
-  artifactKey: Guid(09a06212eb46dec46ba0c2e3ec651e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(10) User Page.unity using Guid(09a06212eb46dec46ba0c2e3ec651e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '952dfff391aaa3fa87c6be6040f33466') in 0.001805 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 4.534825 seconds.
-  path: Assets/Scenes/(10) UserPage.unity
-  artifactKey: Guid(09a06212eb46dec46ba0c2e3ec651e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(10) UserPage.unity using Guid(09a06212eb46dec46ba0c2e3ec651e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1d79f2053421548203810a5328b0909b') in 0.001598 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 317.456509 seconds.
-  path: Assets/Images/blank-profile-picture-g3434ac35f_1280.png
-  artifactKey: Guid(cde24c09bd799884d93169af207b5f7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Images/blank-profile-picture-g3434ac35f_1280.png using Guid(cde24c09bd799884d93169af207b5f7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd18c71c3c951d476b76a1c09ad13efb5') in 0.137525 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 112.026417 seconds.
-  path: Assets/Scenes/(9) HistoryPage.unity
-  artifactKey: Guid(0ab904cf3552d154ebea5c0ce68a8c3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(9) HistoryPage.unity using Guid(0ab904cf3552d154ebea5c0ce68a8c3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf2c8573307be31d622af1a40671e9be') in 0.001608 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 1.269295 seconds.
-  path: Assets/Scenes/(10) UserPage.unity
-  artifactKey: Guid(09a06212eb46dec46ba0c2e3ec651e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes/(10) UserPage.unity using Guid(09a06212eb46dec46ba0c2e3ec651e12) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68da621824d31c36138c78b1b0067d8b') in 0.002279 seconds 

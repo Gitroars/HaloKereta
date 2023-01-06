@@ -51,7 +51,7 @@ public class LoginAdmin : MonoBehaviour
         {
             int currentAdminID = dm.GetAdminID(mobileNumber);
             PlayerPrefs.SetInt("adminId",currentAdminID);
-            SceneManager.LoadScene("(4) MenuPageAdmin");
+            SceneManager.LoadScene("(4.0) MenuPageAdmin");
         }
         else if(!pinIsCorrect)
         {
