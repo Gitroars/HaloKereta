@@ -30,4 +30,9 @@ public class SceneTransitAdmin : MonoBehaviour
     {
         SceneManager.LoadScene("(4.0) MenuPageAdmin");
     }
+
+    public void OpenUserAdminPage()
+    {
+        SceneManager.LoadScene("(5.0) UserPageAdmin");
+    }
 }

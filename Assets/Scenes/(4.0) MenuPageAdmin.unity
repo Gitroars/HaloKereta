@@ -411,7 +411,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 730844345}
         m_TargetAssemblyTypeName: SceneTransitAdmin, Assembly-CSharp
-        m_MethodName: OpenMenuPage
+        m_MethodName: OpenUserAdminPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
