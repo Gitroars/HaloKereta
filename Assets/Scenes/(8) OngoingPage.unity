@@ -1402,7 +1402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dm: {fileID: 730844344}
-  ticketTemplate: {fileID: 1406272756}
+  ticketTemplate: {fileID: 2007002021}
   stationsText: {fileID: 1982097031}
   dateText: {fileID: 1104464896}
   idText: {fileID: 1276841293}
