@@ -544,7 +544,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 730844346}
         m_TargetAssemblyTypeName: SceneTransit, Assembly-CSharp
         m_MethodName: OpenMenuPage
         m_Mode: 1
@@ -986,7 +986,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 730844348}
         m_TargetAssemblyTypeName: TicketScript, Assembly-CSharp
         m_MethodName: OnTap
         m_Mode: 1
@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 730844343}
   - component: {fileID: 730844344}
   - component: {fileID: 730844346}
-  - component: {fileID: 730844347}
+  - component: {fileID: 730844348}
   m_Layer: 0
   m_Name: Admin
   m_TagString: Untagged
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e185e0cc56cd848409a32bf1e89007cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &730844347
+--- !u!114 &730844348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1398,15 +1398,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 730844342}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee15e08df1f5ce242a3a55aafc58ea41, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d94dfd276e7cbc48be7b3ba65ba6bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dm: {fileID: 730844344}
-  paymentTypeText: {fileID: 34838279}
-  ticketIdText: {fileID: 1276841293}
-  originText: {fileID: 1982097031}
-  destText: {fileID: 1982097031}
+  ticketTemplate: {fileID: 1406272756}
+  stationsText: {fileID: 1982097031}
+  dateText: {fileID: 1104464896}
+  idText: {fileID: 1276841293}
   priceText: {fileID: 1805096833}
+  walletText: {fileID: 34838279}
+  tapText: {fileID: 289515822}
+  prevOngoingButton: {fileID: 2112950935}
+  nextOngoingButton: {fileID: 1428826405}
 --- !u!1 &757861455
 GameObject:
   m_ObjectHideFlags: 0
