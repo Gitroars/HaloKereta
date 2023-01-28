@@ -178,7 +178,7 @@ public class DatabaseManager : MonoBehaviour
     #endregion
 
     #region User Functions
-    public void AddUser(string fullName, string email, string phoneNumber, string pin, char gender, int age)
+    public void AddUser(string fullName, string email, string phoneNumber, string pin, char gender, string dateOfBirth)
     {
 
         try
@@ -189,7 +189,7 @@ public class DatabaseManager : MonoBehaviour
                 using var cmd = new MySqlCommand();
                 cmd.Connection = connection;
                 cmd.CommandText =
-                    $"INSERT IGNORE INTO Users (full_name,email,mobile_number,pin,sex,age) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}','{gender}',{age})";
+                    $"INSERT IGNORE INTO Users (full_name,email,mobile_number,pin,sex,date_of_birth) VALUES ('{fullName}','{email}','{phoneNumber}','{pin}','{gender}','{dateOfBirth}')";
                 cmd.ExecuteNonQuery();
                 print("MySQL - Opened Connection");
             }
@@ -494,7 +494,7 @@ public class DatabaseManager : MonoBehaviour
     }
     #endregion
     #region Admin Functions
-    public void AddAdmin(string fullName, string email, string phoneNumber, string pass, char gender, int age)
+    public void AddAdmin(string fullName, string email, string phoneNumber, string pass, char gender, string dateOfBirth)
     {
 
         try
@@ -505,7 +505,7 @@ public class DatabaseManager : MonoBehaviour
                 using var cmd = new MySqlCommand();
                 cmd.Connection = connection;
                 cmd.CommandText =
-                    $"INSERT IGNORE INTO Admins(full_name,email,mobile_number,password,sex,age) VALUES ('{fullName}','{email}','{phoneNumber}','{pass}','{gender}',{age})";
+                    $"INSERT IGNORE INTO Admins(full_name,email,mobile_number,password,sex,age) VALUES ('{fullName}','{email}','{phoneNumber}','{pass}','{gender}','{dateOfBirth}')";
                 cmd.ExecuteNonQuery();
                 print("MySQL - Opened Connection TO ADD ADMIN");
             }

@@ -1133,11 +1133,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dm: {fileID: 730844344}
-  paymentTypeText: {fileID: 0}
-  ticketIdText: {fileID: 0}
-  originText: {fileID: 0}
-  destText: {fileID: 0}
-  priceText: {fileID: 0}
+  paymentTypeText: {fileID: 34838279}
+  ticketIdText: {fileID: 1276841293}
+  originText: {fileID: 1982097031}
+  destText: {fileID: 1982097031}
+  priceText: {fileID: 1805096833}
 --- !u!1 &757861455
 GameObject:
   m_ObjectHideFlags: 0

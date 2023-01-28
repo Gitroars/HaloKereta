@@ -12,19 +12,19 @@ public class Registration : MonoBehaviour
 {
     public DatabaseManager dm;
     public GameObject profileCanvas, pinCanvas;
-    public TMP_InputField phoneNumberField,nameField,ageField,emailField,createPinField,confirmPinField;
-    public TMP_Dropdown genderDropdown;
+    public TMP_InputField phoneNumberField,nameField,emailField,createPinField,confirmPinField;
+    public TMP_Dropdown dateDropdown,monthDropdown,yearDropdown,genderDropdown;
 
     private string phoneNumber,userName,email,gender;
     private char newGender;
-    private int age;
+    private string date,month,year;
     
    
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetDateValue();
     }
 
     // Update is called once per frame
@@ -38,27 +38,26 @@ public class Registration : MonoBehaviour
     {
         phoneNumber = "62"+phoneNumberField.text;
         userName = nameField.text;
-        age = Convert.ToInt32(ageField.text);
         email = emailField.text;
         gender = genderDropdown.options[genderDropdown.value].text;
         newGender = ConvertGender(gender);
         
 
         bool nameValid = IsNameValid(userName);
-        bool ageValid = IsAgeValid(age);
+        
         bool phoneNumberValid = IsNumberValid(phoneNumber);
         
         bool numberExist = dm.CheckUserNumber(phoneNumber);
         bool emailExist = dm.CheckUserEmail(email);
         
         print("Name valid:"+ nameValid);
-        print("Age valid:"+ ageValid);
+        
         print("Number valid:"+ phoneNumberValid);
         
         print("Number:" +  phoneNumber + numberExist);
         print("Email:" + email+ emailExist);
         
-        if(nameValid && ageValid && phoneNumberValid  && !numberExist && !emailExist)
+        if(nameValid && phoneNumberValid  && !numberExist && !emailExist)
         {
             print("Proceeding to next phase of Registration...");
             profileCanvas.SetActive(false);
@@ -66,6 +65,45 @@ public class Registration : MonoBehaviour
         }
         
         
+    }
+
+    private void SetDateValue()
+    {
+        dateDropdown.ClearOptions();
+        for (int i = 1; i < 32; i++)
+        {
+            if (i < 10)
+            {
+                dateDropdown.options.Add(new TMP_Dropdown.OptionData(){text = "0"+i.ToString()});
+            }
+            else
+            {
+                dateDropdown.options.Add(new TMP_Dropdown.OptionData(){text = i.ToString()}); 
+            }
+        }
+        dateDropdown.RefreshShownValue();
+        
+        monthDropdown.ClearOptions();
+        for (int i = 1; i < 13; i++)
+        {
+            if (i < 10)
+            {
+                monthDropdown.options.Add(new TMP_Dropdown.OptionData(){text = "0"+i.ToString()});
+            }
+            else
+            {
+                monthDropdown.options.Add(new TMP_Dropdown.OptionData(){text = i.ToString()}); 
+            }
+            
+        }
+        monthDropdown.RefreshShownValue();
+        
+        yearDropdown.ClearOptions();
+        for (int i = 1900; i < 2023; i++)
+        {
+            yearDropdown.options.Add(new TMP_Dropdown.OptionData(){text = i.ToString()});
+        }
+        yearDropdown.RefreshShownValue();
     }
 
     private bool IsNameValid(string name)
@@ -97,15 +135,10 @@ public class Registration : MonoBehaviour
         return 'n';
     }
 
-    private bool IsAgeValid(int age)
+    private string  GetDateOfBirth()
     {
-       
-        if (age >= 0 && age <= 150)
-        {
-            return true;
-        }
-
-        return false;
+        
+        return yearDropdown.options[yearDropdown.value].text + "-"+ monthDropdown.options[monthDropdown.value].text + "-"+ dateDropdown.options[dateDropdown.value].text;
     }
     private bool IsNumberValid(string phoneNumber)
     {
@@ -132,7 +165,9 @@ public class Registration : MonoBehaviour
         string confirmPin = confirmPinField.text;
         if (createPin.Length ==6 && createPin == confirmPin)
         {
-            dm.AddUser(userName,email,phoneNumber,createPin,newGender,age);
+            string dob = GetDateOfBirth();
+            print(dob);
+            dm.AddUser(userName,email,phoneNumber,createPin,newGender,dob);
             SceneManager.LoadScene("(4) MenuPage");
         }
     }

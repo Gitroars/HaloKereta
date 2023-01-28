@@ -10,7 +10,8 @@ using UnityEngine.SceneManagement;
         public DatabaseManager dm;
         public GameObject profileCanvas, pinCanvas;
         public TMP_InputField phoneNumberField,nameField,ageField,emailField,createPinField,confirmPinField;
-        public TMP_Dropdown genderDropdown;
+        public TMP_Dropdown dateDropdown,monthDropdown,yearDropdown,genderDropdown;
+        
 
         private string phoneNumber,userName,email,gender;
         private char newGender;
@@ -29,6 +30,7 @@ using UnityEngine.SceneManagement;
         {
         
         }
+        
     
 
         public void ContinueRegistration()
@@ -63,6 +65,45 @@ using UnityEngine.SceneManagement;
             }
         
         
+        }
+        
+        private void SetDateValue()
+        {
+            dateDropdown.ClearOptions();
+            for (int i = 1; i < 32; i++)
+            {
+                if (i < 10)
+                {
+                    dateDropdown.options.Add(new TMP_Dropdown.OptionData(){text = "0"+i.ToString()});
+                }
+                else
+                {
+                    dateDropdown.options.Add(new TMP_Dropdown.OptionData(){text = i.ToString()}); 
+                }
+            }
+            dateDropdown.RefreshShownValue();
+        
+            monthDropdown.ClearOptions();
+            for (int i = 1; i < 13; i++)
+            {
+                if (i < 10)
+                {
+                    monthDropdown.options.Add(new TMP_Dropdown.OptionData(){text = "0"+i.ToString()});
+                }
+                else
+                {
+                    monthDropdown.options.Add(new TMP_Dropdown.OptionData(){text = i.ToString()}); 
+                }
+            
+            }
+            monthDropdown.RefreshShownValue();
+        
+            yearDropdown.ClearOptions();
+            for (int i = 1900; i < 2023; i++)
+            {
+                yearDropdown.options.Add(new TMP_Dropdown.OptionData(){text = i.ToString()});
+            }
+            yearDropdown.RefreshShownValue();
         }
 
         private bool IsNameValid(string name)
@@ -117,6 +158,12 @@ using UnityEngine.SceneManagement;
             }
             return numberValid;
         }
+        
+        private string  GetDateOfBirth()
+        {
+        
+            return yearDropdown.options[yearDropdown.value].text + "-"+ monthDropdown.options[monthDropdown.value].text + "-"+ dateDropdown.options[dateDropdown.value].text;
+        }
     
     
             
@@ -129,7 +176,7 @@ using UnityEngine.SceneManagement;
             string confirmPin = confirmPinField.text;
             if ( createPin == confirmPin)
             {
-                dm.AddAdmin(userName,email,phoneNumber,createPin,newGender,age);
+                dm.AddAdmin(userName,email,phoneNumber,createPin,newGender,GetDateOfBirth());
                 SceneManager.LoadScene("(4.0) MenuPageAdmin");
             }
         }
