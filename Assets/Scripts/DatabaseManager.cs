@@ -1,21 +1,31 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using MySql.Data.MySqlClient;
 using UnityEngine;
-
+using UnityEngine.Networking;
 
 
 public class DatabaseManager : MonoBehaviour
 {
+   
+    
+
+    
+    
+    
+
+    
     #region VARIABLES
+    
 
     private string path = "Assets/Scripts/routes.txt";
     
     
-    private string myCertificate = "Assets/SSL/ca-certificate.crt";
+    
 
     [Header("Database Properties")]
     string Host = "vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com";
@@ -118,8 +128,8 @@ public class DatabaseManager : MonoBehaviour
         conn_string.Server = Host;
         conn_string.Port = Convert.ToUInt32(Port);
         conn_string.Database = Database;
-        conn_string.SslMode = MySqlSslMode.VerifyCA;
-        conn_string.CertificateFile = myCertificate;
+        // conn_string.SslMode = MySqlSslMode.VerifyCA;
+        // conn_string.CertificateFile = myCertificate;
 
         connection = new MySqlConnection(conn_string.ToString());
         print("Connection ready");
@@ -892,6 +902,32 @@ public class DatabaseManager : MonoBehaviour
         connection.Close();
 
         return 0;
+    }
+
+    public void SetRoutePrice(int routeId, int newPrice)
+    {
+        try
+        {
+            using (connection)
+            {
+
+                connection.Open();
+                print("MySQL - Opened Connection To SET ROUTE PRICE");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText =
+                    $"UPDATE Routes SET route_price = '{newPrice}' WHERE route_id = {routeId}";
+                var myReader = cmd.ExecuteNonQuery();
+            }
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+
+        connection.Close();
+
+        
     }
     
     public int GetRouteIdFromStations(int originId, int destinationId)

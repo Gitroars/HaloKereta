@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
     {
         public DatabaseManager dm;
         public GameObject profileCanvas, pinCanvas;
-        public TMP_InputField phoneNumberField,nameField,ageField,emailField,createPinField,confirmPinField;
+        public TMP_InputField phoneNumberField,nameField,emailField,createPinField,confirmPinField;
         public TMP_Dropdown dateDropdown,monthDropdown,yearDropdown,genderDropdown;
         
 
@@ -37,7 +37,7 @@ using UnityEngine.SceneManagement;
         {
             phoneNumber = "62"+phoneNumberField.text;
             userName = nameField.text;
-            age = Convert.ToInt32(ageField.text);
+            
             email = emailField.text;
             gender = genderDropdown.options[genderDropdown.value].text;
             newGender = ConvertGender(gender);

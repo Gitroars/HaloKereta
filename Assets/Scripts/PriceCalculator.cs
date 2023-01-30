@@ -111,8 +111,8 @@ public class PriceCalculator : MonoBehaviour
 
     void CalculatePrice()
     {
-        
-        ticketPrice = dm.GetRoutePrice(originId, destId);
+        int ticketRouteId = dm.GetRouteIdFromStations(originId, destId);
+        ticketPrice = dm.GetRoutePriceFromId(ticketRouteId);
         if (roundTrip!=0)
         {
             ticketPrice *= 2;
