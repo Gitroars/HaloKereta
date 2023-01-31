@@ -28,12 +28,12 @@ public class DatabaseManager : MonoBehaviour
     
 
     [Header("Database Properties")]
-    string Host = "vultr-prod-3bfe867e-fd1a-4661-964c-7a93d5c43308-vultr-prod-258c.vultrdb.com";
+    string Host = "";
 
-    string Port = "16751";
-    string User = "mrtadmin";
-    string Password = "hcL^D7Vh7SLcFZ";
-    string Database = "mrtdb";
+    string Port = "";
+    string User = "";
+    string Password = "";
+    string Database = "";
 
 
     private MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
