@@ -16,7 +16,6 @@ public class TicketScript : MonoBehaviour
     private int _userId;
 
     private List<DatabaseManager.Ticket> _ongoingTicketList = new List<DatabaseManager.Ticket>();
-    private List<DatabaseManager.Ticket> _historyTicketList = new List<DatabaseManager.Ticket>();
     private int ongoingTicketAmount = 0;
     private int currentPageIndex = 0;
     private int currentTicketId = 0;

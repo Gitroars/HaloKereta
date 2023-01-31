@@ -120,7 +120,7 @@ public class RouteAdmin : MonoBehaviour
 
     }
 
-    void SetNewPrice()
+    public void SetNewPrice()
     {
         int newTicketPrice = 0;
         if (newTicketPriceField.text != null)
@@ -131,6 +131,7 @@ public class RouteAdmin : MonoBehaviour
         if (newTicketPrice> 0)
         {
             dm.SetRoutePrice(ticketRouteId,newTicketPrice);
+            priceText.text = newTicketPrice.ToString();
         }
         
     }

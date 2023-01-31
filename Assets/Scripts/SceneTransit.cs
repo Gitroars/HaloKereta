@@ -16,6 +16,11 @@ public class SceneTransit : MonoBehaviour
         
     }
 
+    public void OpenLoginPage()
+    {
+        SceneManager.LoadScene("(2) LoginPage");
+    }
+
     public void OpenMenuPage()
     {
         SceneManager.LoadScene("(4) MenuPage");
@@ -44,6 +49,11 @@ public class SceneTransit : MonoBehaviour
     public void OpenHistoryPage()
     {
         SceneManager.LoadScene("(9) HistoryPage");
+    }
+
+    public void OpenProfilePage()
+    {
+        SceneManager.LoadScene("(10) ProfilePage");
     }
     
 }

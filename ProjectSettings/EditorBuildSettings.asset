@@ -5,40 +5,46 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/(2) LoginPage.unity
     guid: bb54ade5d5182c24caee7b02f24c4f49
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/(2.0) LoginPageAdmin.unity
     guid: 65ef0eca697aa4843bcecd6cfecbd57b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/(3) RegistrationPage.unity
     guid: 80335c290b7825048b47f2e9c4e2eacb
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/(3.0) RegistrationPageAdmin.unity
     guid: a108c71cea1176446a4b78e164cf7539
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/(4) MenuPage.unity
     guid: 72871e3f275a0894086139865b3121fe
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/(4.0) MenuPageAdmin.unity
     guid: acf45c874572f074396382af149e64b3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/(5) StationPage.unity
     guid: b5bf7941f01160a4baf22fc26159cf20
   - enabled: 0
-    path: Assets/Scenes/(5.0) UserPageAdmin.unity
-    guid: 33eaa192d6a6c994eb1b006d5d956e4f
-  - enabled: 1
     path: Assets/Scenes/(6) PaymentPage.unity
     guid: 48e34704accc8b34ab6bf1ec510da113
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/(7) TicketPage.unity
     guid: a0931a1f9970bba4b9fa9fa54eb471d7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/(8) OngoingPage.unity
     guid: d2cb6173a85d7f1408e9d1a5237fb417
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/(9) HistoryPage.unity
     guid: c7a4939be1e7ed347b4fc9268061dd68
+  - enabled: 1
+    path: Assets/Scenes/(5.0) StationPageAdmin.unity
+    guid: b4733fa59ca436f4685ccfe1d96d3ba1
+  - enabled: 1
+    path: Assets/Scenes/(10.0) UserPageAdmin.unity
+    guid: 09a06212eb46dec46ba0c2e3ec651e12
+  - enabled: 0
+    path: Assets/Scenes/(10) ProfilePage.unity
+    guid: 83806735374f7e94ebaf57d74e87e1fe
   m_configObjects: {}

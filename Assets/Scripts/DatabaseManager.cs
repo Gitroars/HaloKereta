@@ -82,8 +82,8 @@ public class DatabaseManager : MonoBehaviour
 
     public class AppUser
     {
-        public int UserId,Age;
-        public string FullName,Email,Pin,MobileNumber;
+        public int UserId;
+        public string FullName,Email,Pin,MobileNumber,BirthDate;
         public char Sex;
 
         public AppUser()
@@ -91,10 +91,10 @@ public class DatabaseManager : MonoBehaviour
             
         }
 
-        public AppUser(int userId, int age, string fullName, string email, string pin, string mobileNumber, char sex)
+        public AppUser(int userId, string birthDate, string fullName, string email, string pin, string mobileNumber, char sex)
         {
             UserId = userId;
-            Age = age;
+            BirthDate = birthDate;
             FullName = fullName;
             Email = email;
             Pin = pin;
@@ -394,9 +394,52 @@ public class DatabaseManager : MonoBehaviour
         return false;
     }
 
+    public AppUser GetIndividualUserData(int userId)
+    {
+        AppUser appUser = new AppUser();
+        try
+        {
+            using (connection)
+            {
+
+                connection.Open();
+                print("MySQL - Opened Connection To GET INDIVIDUAL USER DATA");
+                using var cmd = connection.CreateCommand();
+                cmd.Connection = connection;
+                cmd.CommandText =
+                    $" SELECT * from Users WHERE user_id = '{userId}'";
+
+                var myReader = cmd.ExecuteReader();
+                while (myReader.Read())
+                {
+                    appUser.FullName= myReader.GetString(1);
+                    appUser.Sex = Convert.ToChar(myReader.GetString(2));
+                    appUser.Email= myReader.GetString(3);
+                    appUser.Pin = myReader.GetString(4);
+                    appUser.MobileNumber = myReader.GetString(5);
+                    appUser.BirthDate = myReader.GetString(6);
+                }
+
+                
+                    
+                
+
+                return appUser;
+            }
+            
+        }
+        catch (MySqlException exception)
+        {
+            print(exception.Message);
+        }
+        connection.Close();
+        return appUser;
+    }
+
     public List<AppUser> GetUserList()
     {
         List<AppUser> appUserList = new List<AppUser>();
+        
         
         try
         {
@@ -423,8 +466,8 @@ public class DatabaseManager : MonoBehaviour
                         string DbEmail = myReader.GetString(3);
                         string DbPin = myReader.GetString(4);
                         string DbMobileNumber = myReader.GetString(5);
-                        int DbAge = Convert.ToInt32(myReader.GetString(6));
-                        AppUser newUser = new AppUser(DbUserId, DbAge, DbFullName, DbEmail, DbPin, DbMobileNumber,
+                        string DbBirthDate= myReader.GetString(6);
+                        AppUser newUser = new AppUser(DbUserId, DbBirthDate, DbFullName, DbEmail, DbPin, DbMobileNumber,
                             DbSex);
                         appUserList.Add(newUser);
                         
@@ -449,9 +492,8 @@ public class DatabaseManager : MonoBehaviour
         return new List<AppUser>();
     }
 
-    public AppUser GetUserData(int appUserId)
+    public void SetUserData(int appUserId,string newName,char newGender,string newEmail,string newPin,string newPhone,string newDate )
     {
-        AppUser appUser = new AppUser();
         
         try
         {
@@ -459,36 +501,16 @@ public class DatabaseManager : MonoBehaviour
             {
                 
                 connection.Open();
-                print("MySQL - Opened Connection To GET USER LIST");
+                print("MySQL - Opened Connection To SET NEW USER DATA");
                 using var cmd = connection.CreateCommand();
                 cmd.Connection = connection;
                 cmd.CommandText =
-                    $" SELECT * from Users WHERE user_id = {appUserId}";
-                                  
-                var myReader = cmd.ExecuteReader();
+                    $"UPDATE Users SET full_name = '{newName}',sex='{newGender}',email='{newEmail}',pin='{newPin}',mobile_number='{newPhone}',date_of_birth='{newDate}' WHERE user_id = '{appUserId}'";
+
+                var myReader = cmd.ExecuteNonQuery();
                 
-                while (myReader.HasRows)
-                {
-                    print("Found user list");
-                    while (myReader.Read())
-                    {
-                        appUser.UserId = Convert.ToInt32(myReader.GetString(0));
-                        appUser.FullName = myReader.GetString(1);
-                        appUser.Sex = Convert.ToChar(myReader.GetString(2));
-                        appUser.Email = myReader.GetString(3);
-                        appUser.Pin = myReader.GetString(4);
-                        appUser.MobileNumber = myReader.GetString(5);
-                        appUser.Age = Convert.ToInt32(myReader.GetString(6));
-                        
-                       
-                        
-                    }
-                    myReader.NextResult();
-                }
-                if (!myReader.IsClosed)
-                {
-                    myReader.Close();
-                }
+                
+                
                 connection.Close();
                 
 
@@ -499,8 +521,6 @@ public class DatabaseManager : MonoBehaviour
             print(exception.Message);
         }
         connection.Close();
-
-        return  appUser;
     }
     #endregion
     #region Admin Functions
@@ -515,7 +535,7 @@ public class DatabaseManager : MonoBehaviour
                 using var cmd = new MySqlCommand();
                 cmd.Connection = connection;
                 cmd.CommandText =
-                    $"INSERT IGNORE INTO Admins(full_name,email,mobile_number,password,sex,age) VALUES ('{fullName}','{email}','{phoneNumber}','{pass}','{gender}','{dateOfBirth}')";
+                    $"INSERT IGNORE INTO Admins(full_name,sex,email,password,mobile_number,date_of_birth) VALUES ('{fullName}','{gender}','{email}','{pass}','{phoneNumber}','{dateOfBirth}')";
                 cmd.ExecuteNonQuery();
                 print("MySQL - Opened Connection TO ADD ADMIN");
             }

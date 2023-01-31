@@ -33,6 +33,11 @@ public class SceneTransitAdmin : MonoBehaviour
 
     public void OpenUserAdminPage()
     {
-        SceneManager.LoadScene("(5.0) UserPageAdmin");
+        SceneManager.LoadScene("(10.0) UserPageAdmin");
+    }
+
+    public void OpenStationPage()
+    {
+        SceneManager.LoadScene("(5.0) StationPageAdmin");
     }
 }

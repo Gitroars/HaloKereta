@@ -22,6 +22,7 @@ using UnityEngine.SceneManagement;
         // Start is called before the first frame update
         void Start()
         {
+            SetDateValue();
         
         }
 

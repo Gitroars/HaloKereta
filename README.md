@@ -1,6 +1,6 @@
 ## Project Requirements
 
-Unity 2021.3.0f1
+Unity 2021.3.17f1
 
 Jetbrains Rider 2022.3
 

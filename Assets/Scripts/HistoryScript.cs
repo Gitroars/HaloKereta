@@ -15,9 +15,9 @@ public class HistoryScript : MonoBehaviour
 
     private int _userId;
 
-    private List<DatabaseManager.Ticket> _ongoingTicketList = new List<DatabaseManager.Ticket>();
+   
     private List<DatabaseManager.Ticket> _historyTicketList = new List<DatabaseManager.Ticket>();
-    private int ongoingTicketAmount = 0;
+    private int ticketAmount = 0;
     private int currentPageIndex = 0;
     private int currentTicketId = 0;
     public GameObject ticketTemplate;
@@ -52,9 +52,9 @@ public class HistoryScript : MonoBehaviour
     {
         dm.CheckTicketExpiry();
         print("Retrieving ongoing tickets from userId " + _userId);
-        _ongoingTicketList = dm.GetUserHistoryTickets(_userId);
-        ongoingTicketAmount= _ongoingTicketList.Count;
-        print("Found " + ongoingTicketAmount + " ongoing tickets");
+        _historyTicketList = dm.GetUserHistoryTickets(_userId);
+        ticketAmount= _historyTicketList.Count;
+        print("Found " + ticketAmount + " ongoing tickets");
     }
 
     
@@ -65,16 +65,16 @@ public class HistoryScript : MonoBehaviour
 
     void LoadOngoingTickets()
     {
-        if (ongoingTicketAmount > 0)
+        if (ticketAmount > 0)
         {
-            currentTicketId = _ongoingTicketList[currentPageIndex].TicketId;
-            int currentTicketRouteId = _ongoingTicketList[currentPageIndex].RouteId;
+            currentTicketId = _historyTicketList[currentPageIndex].TicketId;
+            int currentTicketRouteId = _historyTicketList[currentPageIndex].RouteId;
             Tuple<string, string> stationsTuple = dm.GetStationsFromRouteId(currentTicketRouteId);
             stationsText.text = stationsTuple.Item1 + " > " + stationsTuple.Item2;
             idText.text = "Ticket Number "+ currentTicketId.ToString();
             priceText.text = "Rp. " + dm.GetRoutePriceFromId(currentTicketRouteId).ToString();
-            walletText.text = dm.GetPayTypeName(_ongoingTicketList[currentPageIndex].PaymentId);
-            string dateTime = _ongoingTicketList[currentPageIndex].Time;
+            walletText.text = dm.GetPayTypeName(_historyTicketList[currentPageIndex].PaymentId);
+            string dateTime = _historyTicketList[currentPageIndex].Time;
             dateTime.Replace(".", ":");
             dateText.text = dateTime;
             ticketTemplate.SetActive(true);
@@ -95,7 +95,7 @@ public class HistoryScript : MonoBehaviour
         { prevOngoingButton.SetActive(true);
         }
 
-        if (currentPageIndex == ongoingTicketAmount-1)
+        if (currentPageIndex == ticketAmount-1)
         {
             nextOngoingButton.SetActive(false);
         }
@@ -117,7 +117,7 @@ public class HistoryScript : MonoBehaviour
     }
     public void NextOngoingTicket()
     {
-        if (currentPageIndex != _ongoingTicketList.Count)
+        if (currentPageIndex != _historyTicketList.Count)
         {
             currentPageIndex++;
             DecideButtonVisible();
